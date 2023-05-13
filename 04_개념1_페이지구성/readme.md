@@ -192,3 +192,16 @@ Route (pages)                              Size     First Load JS
 - 이름.module.css 와 같이 module을 중간에 붙여줘야 한다
 
 ## 4.13 ~ 4.14 레이아웃 챌린지
+
+## 4.15 링크 만들기
+
+- a대신 Link를 사용하자
+
+  - import Link from "next/link";
+
+- `<Link>` 컴포넌트
+  - https://nextjs.org/docs/app/api-reference/components/link
+  - `<Link>`는 HTML `<a>` 요소를 확장하여 경로 간 prefetching 및 클라이언트 측 네비게이션(페이지이동)을 제공하는 React 구성 요소입니다. Next.js에서 경로 사이를 탐색하는 기본 방법입니다.
+    - prefetching
+      - https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#prefetching
+      - 미리 가져오기는 경로를 방문하기 전에 백그라운드에서 미리 로드하는 방법입니다. 미리 가져온 경로의 렌더링 결과는 라우터의 클라이언트 측 캐시에 추가됩니다. 이렇게 하면 미리 가져온 경로로 거의 즉시 탐색할 수 있습니다.

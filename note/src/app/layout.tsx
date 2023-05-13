@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styles from "./layout.module.css";
 import { Inter } from "next/font/google";
 
@@ -19,8 +20,9 @@ export default function RootLayout({
         <header className={styles.header}>
           <h1>Demo Note</h1>
           <nav className={styles.nav}>
-            <a href="">Contact</a>
-            <a href="">About</a>
+            <Link href="/products">Products</Link>
+            <Link href="/contact">Contact</Link>
+            <Link href="/about">About</Link>
           </nav>
         </header>
         {children}
