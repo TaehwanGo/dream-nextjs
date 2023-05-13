@@ -180,3 +180,13 @@ Route (pages)                              Size     First Load JS
   - `import { notFound } from "next/navigation";`
 - not-found.tsx은 각 디렉토리 마다 만들 수 있다
 - pages/404.tsx를 만들면 모든 경로에서 404 페이지가 나온다.
+
+## 4.12 레이아웃으로 골격을!(layout.tsx)
+
+- page.tsx는 해당 디렉토리의 페이지를 렌더링하는 역할을 한다.
+- layout.tsx는 page.tsx를 감싸서 공통으로 사용할 UI를 만드는 역할을 한다.
+  - layout.tsx에서 children을 사용해서 하위 디렉토리의 page.tsx를 감싸준다.
+
+### Post CSS
+
+- 이름.module.css 와 같이 module을 중간에 붙여줘야 한다
