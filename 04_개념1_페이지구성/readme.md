@@ -167,3 +167,16 @@ Route (pages)                              Size     First Load JS
   - /shop => params : {}
   - /shop/a => params : { slug: ["a"] }
   - /shop/a/b => params : { slug: ["a", "b"] }
+
+## 4.11 Not Found 페이지
+
+- File convention
+
+  - page.tsx : 해당 디렉토리에서 표시할 페이지
+
+- 해당 경로 내에서 `notFound 함수를 호출`하면 not-found.tsx를 렌더링한다.
+- 기본적으로 404 페이지는 next.js에서 제공되는 페이지가 나온다
+- 하지만 notFound()를 호출하면 not-found.tsx가 나온다.
+  - `import { notFound } from "next/navigation";`
+- not-found.tsx은 각 디렉토리 마다 만들 수 있다
+- pages/404.tsx를 만들면 모든 경로에서 404 페이지가 나온다.

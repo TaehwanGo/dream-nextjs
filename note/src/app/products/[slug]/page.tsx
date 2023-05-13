@@ -1,9 +1,14 @@
+import { notFound } from "next/navigation";
+
 type Props = {
   params: {
     slug: string;
   };
 };
 export default function PantsPage({ params }: Props) {
+  if (params.slug === "nothing") {
+    notFound();
+  }
   return <div>Products/ {params.slug} Page</div>;
 }
 
