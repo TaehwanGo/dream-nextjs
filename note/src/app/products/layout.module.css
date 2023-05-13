@@ -1,0 +1,13 @@
+.category {
+  padding: 16px;
+  margin-top: 8px;
+  border: 1px solid salmon;
+}
+
+.category a {
+  padding: 0 8px;
+}
+
+.product {
+  padding: 8px 8px;
+}
