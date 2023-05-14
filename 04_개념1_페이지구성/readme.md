@@ -207,3 +207,139 @@ Route (pages)                              Size     First Load JS
       - 미리 가져오기는 경로를 방문하기 전에 백그라운드에서 미리 로드하는 방법입니다. 미리 가져온 경로의 렌더링 결과는 라우터의 클라이언트 측 캐시에 추가됩니다. 이렇게 하면 미리 가져온 경로로 거의 즉시 탐색할 수 있습니다.
 
 ## 4.16 ~ 4.17 제품 링크 만들기
+
+- https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+
+## 4.18 변화에 대처하는 자세
+
+- 페이지별 SEO도 할 수 있다
+  - https://nextjs.org/docs/basic-features/pages#next-seo
+- SEO : Search Engine Optimization
+- 공식 문서를 확인하자
+- 이전에는 Head.tsx를 이용했지만 이제는 Metadata를 사용하자
+  - https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+- 시시각각 변하는 트렌드를 따라간다는 것은 변화의 역사를 직접 체험할 수 있는 좋은 기회이다
+
+## 4.19 SEO 중요 내용
+
+- https://nextjs.org/docs/app/building-your-application/optimizing/metadata
+- static과 dynamic metadata 모두 오직 서버컴포넌트에서만 사용가능하다
+
+### Static Metadata
+
+```tsx
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Home",
+  description: "Welcome to Next.js",
+};
+
+export default function Page() {
+  return "...";
+}
+```
+
+### Dynamic Metadata
+
+```tsx
+import type { Metadata } from "next";
+
+// The `fetch` response is cached and reused between both functions
+// below, resulting in a single API request. If you cannot use `fetch`
+// directly, you can use `cache`. Learn more:
+// https://beta.nextjs.org/docs/data-fetching/caching
+async function getProduct(id) {
+  const res = await fetch(`https://.../api/products/${id}`);
+  return res.json();
+}
+
+// 비동기적으로 메타데이터를 생성
+export async function generateMetadata({ params }): Promise<Metadata> {
+  const product = await getProduct(params.id);
+  return { title: product.title };
+}
+
+export default async function Page({ params }) {
+  const product = await getProduct(params.id);
+  // ...
+}
+```
+
+### JSON-LD
+
+- 검색엔진(search engine)이 이해할 수 있는 데이터 포맷
+
+```tsx
+// app/products/[id]/page.tsx
+export default async function Page({ params }) {
+  const product = await getProduct(params.id);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: product.name,
+    image: product.image,
+    description: product.description,
+  };
+
+  return (
+    <section>
+      {/* Add JSON-LD to your page */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      {/* ... */}
+    </section>
+  );
+}
+```
+
+### title template
+
+- title을 위한 템플릿을 만들어서 사용할 수도 있다
+- https://nextjs.org/docs/app/api-reference/functions/generate-metadata#template
+
+```tsx
+// app/layout.tsx
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: {
+    template: "%s | Acme",
+  },
+};
+```
+
+```tsx
+// app/about/page.tsx
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "About",
+};
+
+// Output: <title>About | Acme</title>
+```
+
+### 메타 데이터 정리
+
+#### 자식 노드에 있는 메타데이터가 상위의 메타데이터를 덮어쓸 수 있음
+
+- 상위 layout.tsx의 메타데이터 중 description은 그대로 쓰고 title만 업데이트 할 수도 있다
+
+```tsx
+// src/app/products/[slug]/page.tsx
+export function generateMetadata({ params }: Props) {
+  return {
+    title: `제품의 이름: ${params.slug}`,
+  };
+}
+```
+
+- 만약 자식노드에 별도로 메타데이터가 없다면 상위의 메타데이터를 따라감
+
+- 메타데이터를 하나도 지정하지 않아도 viewport에 대한 정보는 자동으로 지정됨
+
+#### title을 위한 템플릿을 만들어서 사용할 수도 있다

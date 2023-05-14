@@ -1,5 +1,11 @@
 import { notFound } from "next/navigation";
 
+export function generateMetadata({ params }: Props) {
+  return {
+    title: `제품의 이름: ${params.slug}`,
+  };
+}
+
 type Props = {
   params: {
     slug: string;
