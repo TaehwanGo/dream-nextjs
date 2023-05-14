@@ -205,3 +205,5 @@ Route (pages)                              Size     First Load JS
     - prefetching
       - https://nextjs.org/docs/app/building-your-application/routing/linking-and-navigating#prefetching
       - 미리 가져오기는 경로를 방문하기 전에 백그라운드에서 미리 로드하는 방법입니다. 미리 가져온 경로의 렌더링 결과는 라우터의 클라이언트 측 캐시에 추가됩니다. 이렇게 하면 미리 가져온 경로로 거의 즉시 탐색할 수 있습니다.
+
+## 4.16 ~ 4.17 제품 링크 만들기
