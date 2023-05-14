@@ -91,7 +91,7 @@ Route (pages)                              Size     First Load JS
 ## 4.9 페이지 미리 생성
 
 - 원하는 경로에서 페이지를 미리 만들어두고 싶다면?
-  - dynamic route를 사용하는 페이지에서 getStaticPaths 함수를 export 해주면 된다.
+  - dynamic route를 사용하는 페이지에서 getStaticParams 함수를 export 해주면 된다.
 
 ```tsx
 type Props = {
@@ -162,6 +162,7 @@ Route (pages)                              Size     First Load JS
   - /shop/a/b/c/d/e/f/g/h/i/j/k/l/m/n/o/p/q/r/s/t/u/v/w/x/y/z
     - 이런식으로 여러개의 경로를 받을 수 있다.
     - { slug: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", ...] }
+  - /shop/:id/products/:pid
 - app/shop/`[[...slug]]`/page.js
   - 대괄호가 두개를 사용했다면 있어도 되고 없어도 되는 옵셔널
   - /shop => params : {}
