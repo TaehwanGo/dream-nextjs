@@ -343,3 +343,22 @@ export function generateMetadata({ params }: Props) {
 - 메타데이터를 하나도 지정하지 않아도 viewport에 대한 정보는 자동으로 지정됨
 
 #### title을 위한 템플릿을 만들어서 사용할 수도 있다
+
+## 4.20 Nextjs 장점 파악!
+
+- Link 태그를 사용하면 해당 페이지에 대한 정보를 미리 prefetching해온다
+
+## 4.21 마무리
+
+- SSG로 만들고 싶다면
+  - generateStaticParams 함수를 컴포넌트 맨 밑에서 사용함으로써 만들 수 있다
+- not-found
+  - 해당 경로에서 notFound()를 호출하면 not-found.tsx를 렌더링한다.
+- 재사용 가능한 레이아웃
+  - layout.tsx
+- Link 태그
+  - prefetching
+- SEO
+  - static과 dynamic `metadata` 모두 오직 서버컴포넌트에서만 사용가능하다
+  - JSON-LD
+  - title template
