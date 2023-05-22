@@ -73,3 +73,10 @@ npm run start
   - interleave Server and Client Components
 - 서버컴포넌트는 최종 빌드된 js 크기도 줄여준다
 - 서버컴포넌트를 사용하면 apiKey 같은 것이 노출되지 않는다
+
+## 5.7 리팩토링(설계)
+
+- 동적인 데이터를 이용해서 구현해보자
+- service라는 폴더를 만들고
+  - 그 안에 products.ts를 만들어서 products 와 관련된 데이터를 다루는 함수를 만든다
+  - 만들어진 함수를 각 서버 컴포넌트에서 사용한다
