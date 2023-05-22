@@ -80,3 +80,9 @@ npm run start
 - service라는 폴더를 만들고
   - 그 안에 products.ts를 만들어서 products 와 관련된 데이터를 다루는 함수를 만든다
   - 만들어진 함수를 각 서버 컴포넌트에서 사용한다
+
+## 5.8 SSG 렌더링
+
+- Node에서 파일을 읽어오고 Typescript를 이용
+- Next.js의 서버컴포넌트는 비동기로도 구현 가능하다
+  - 컴포넌트가 async 함수가 될 수 있다
