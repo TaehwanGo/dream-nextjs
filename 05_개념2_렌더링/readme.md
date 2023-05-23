@@ -86,3 +86,20 @@ npm run start
 - Node에서 파일을 읽어오고 Typescript를 이용
 - Next.js의 서버컴포넌트는 비동기로도 구현 가능하다
   - 컴포넌트가 async 함수가 될 수 있다
+
+## 5.9 ISR 렌더링
+
+- 서버 -> 데이터 읽음 -> SSG
+  - SSG : 페이지 미리 생성
+- 서버 컴포넌트는 기본적으로 SSG
+
+- ISR로 동작하기 위해서 컴포넌트 맨위에 `revalidate`를 지정해주면 된다
+
+```ts
+export const revalidate = 3; // 3초마다 재생성
+```
+
+- npm run dev로 실행하면 항상 SSR로 동작하기 때문에
+- ISR을 확인하려면 빌드 후 실행해야한다
+  - npm run build
+  - npm run start
