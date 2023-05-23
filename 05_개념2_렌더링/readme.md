@@ -175,3 +175,19 @@ export default function MeowArticle() {
 ```
 
 - client 컴포넌트이더라도 초기 값이 있다면 초기값으로 SSG가 된다
+
+## 5.12 공식 사이트 읽기
+
+- 여러 컴포넌트에서 중복으로 요청(fetch)을 해도 자동으로 중복제거를 해준다
+  - POST 같은 요청은 중복제거를 하지 않음
+- CSR을 사용할 땐 ReactQuery를 써도 된다
+- validation을 위해 header와 cookie를 사용할 때 제공되는 메서드가 있다
+  - https://nextjs.org/docs/app/building-your-application/data-fetching/server-actions#validation
+
+## 5.13 버전12로 구현한 것 살펴보기
+
+- 기본적으로 웬만한 코드들은 Client side에서 실행되고
+- 컴포넌트 맨 아래 getStaticProps 같은 함수들만 서버에서 실행된다
+- getServerSideProps
+  - 서버에서 실행되는 함수
+  - revalidate도 지정할 수 있다
