@@ -143,3 +143,35 @@ export default async function ProductsPage() {
   );
 }
 ```
+
+## 5.11 fetch를 사용한 CSR
+
+- SSG로 만들면 고양이에 대한 재밌는 사실이 고정되기 때문에 흥미가 떨어질 수 있다
+- 그러자니 SSR로 만들자니 서버에 부하가 감
+- 페이지에 있긴 하지만 천천히 렌더링 돼도 되는 경우 CSR로 만들어도 된다
+
+```tsx
+"use client";
+
+import { useEffect, useState } from "react";
+import styles from "./MeowArticle.module.css";
+
+export default function MeowArticle() {
+  const [text, setText] = useState("데이터 준비중...");
+
+  useEffect(() => {
+    fetch("https://meowfacts.herokuapp.com", {
+      next: {
+        revalidate: 0, // 3 -> ISR, 0 -> SSR
+      },
+      cache: "no-store", // make it always fetch like SSR
+    })
+      .then((res) => res.json())
+      .then((data) => setText(data.data[0]));
+  }, []);
+
+  return <article className={styles.article}>{text}</article>;
+}
+```
+
+- client 컴포넌트이더라도 초기 값이 있다면 초기값으로 SSG가 된다
