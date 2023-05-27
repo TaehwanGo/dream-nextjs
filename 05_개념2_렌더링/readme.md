@@ -200,7 +200,7 @@ export default function MeowArticle() {
   - 해당 api를 다른 클라이언트에게 api형태로 제공하고 싶다면 api 라우트를 사용하면 된다
 
 ```ts
-// api/hello.ts
+// pages/api/hello.ts
 import type { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
@@ -213,3 +213,9 @@ export default async function handler(
 
 - api/hello로 요청을 보내면 json 형태로 응답을 받을 수 있다
 - 반드시 export default로 함수를 만들어야 한다
+
+## 5.15 커뮤니티에 기여하기
+
+- app 경로에 route를 만들고 POST와 GET을 나눠서 처리할 수 있다
+  - 기존 pages 경로에 있는 api 문제점
+    - req.method가 GET인지 POST인지 확인을 다 했어야 함
