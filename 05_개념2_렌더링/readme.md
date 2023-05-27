@@ -219,3 +219,8 @@ export default async function handler(
 - app 경로에 route를 만들고 POST와 GET을 나눠서 처리할 수 있다
   - 기존 pages 경로에 있는 api 문제점
     - req.method가 GET인지 POST인지 확인을 다 했어야 함
+
+## 5.16 예전 방식의 API 라우트
+
+- service에서 만들었던 함수를 재사용하자
+- pages 디렉토리에서 api 함수들은 method를 if문으로 구분해야 한다
