@@ -1,6 +1,8 @@
 import { getProducts } from "@/service/products";
 import Link from "next/link";
 import MeowArticle from "@/components/MeowArticle";
+import Image from "next/image";
+import clothesImage from "../../../public/images/clothes.jpeg";
 
 // export const revalidate = 3;
 
@@ -12,6 +14,7 @@ export default async function ProductsPage() {
   return (
     <>
       <h3>Products Page</h3>
+      <Image src={clothesImage} alt="clothes" priority />
       <ul>
         {products.map((product, index) => (
           <li key={index}>

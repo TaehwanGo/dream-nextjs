@@ -148,3 +148,22 @@ export default function Error({
 ```
 
 - 에러 컴포넌트는 클라이언트이므로 무조건 'use client'를 사용해야 한다
+
+## 6.5 이미지
+
+- public/images에 이미지를 넣어서 테스트를 해보자
+- local에 있는 이미지를 Next에서 보여줄 때 어떻게 처리되는지 알아보자
+  - 자동 최적화
+- 인터넷 상에 있는 이미지는 어떻게 할까?
+  - width, height을 지정해야 한다
+  - next.config.js에서도 등록을 해줘야 한다
+- Image 컴포넌트의 장점
+
+  - 이미지 사이즈 최적화
+  - 사이즈가 정해져있고 그 영역을 차지하고 있기 때문에 layout shift가 발생하지 않는다
+
+- 한 페이지에서 이미지가 많은 경우 우선순위를 정할 수 있다
+
+```tsx
+<Image src={clothesImage} alt="clothes" priority />
+```
