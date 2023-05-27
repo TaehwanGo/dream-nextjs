@@ -226,3 +226,15 @@ export default async function handler(
 - pages 디렉토리에서 api 함수들은 method를 if문으로 구분해야 한다
 
 ## 5.17 최신 방식의 라우트 핸들러
+
+```ts
+import { getProducts } from "@/service/products";
+import { NextResponse } from "next/server";
+
+// app/api 에선 method 별로 나눠서 작성할 수 있다
+// 단점은 리턴 타입을 지정할 수 없다는 것이다(generic이 아님)
+export async function GET(request: Request, response: Response) {
+  const products = await getProducts();
+  return NextResponse.json(products);
+}
+```
