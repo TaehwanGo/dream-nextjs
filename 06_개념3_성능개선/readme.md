@@ -151,6 +151,8 @@ export default function Error({
 
 ## 6.5 이미지
 
+- 공식 문서
+  - https://nextjs.org/docs/app/building-your-application/optimizing/images
 - public/images에 이미지를 넣어서 테스트를 해보자
 - local에 있는 이미지를 Next에서 보여줄 때 어떻게 처리되는지 알아보자
   - 자동 최적화
@@ -172,3 +174,26 @@ export default function Error({
 
 - products.json 데이터의 image를 추가하고 각 이미지 파일명 값을 지정해준다
 - 데이터 타입이 변경되었으므로 타입을 변경해준다
+
+## 6.8 폰트
+
+- 공식 문서
+  - https://nextjs.org/docs/app/building-your-application/optimizing/fonts
+- 폰트 적용 과정
+
+  - 폰트 파일 다운로드 전 까지는 브라우저가 기본 폰트를 사용한다
+  - 폰트 파일 다운로드가 완료되면 브라우저가 폰트를 적용한다
+  - 폰트가 새롭게 적용될 때 UI가 깨지는 현상이 발생할 수 있다
+
+- next/font는 자동적으로 폰트를 최적화한다
+
+  - 서버에서 자체적으로 폰트 호스팅
+  - layout shift가 발생하지 않도록 함
+    - 내부적으로 CSS size-adjust를 사용해서 해결
+
+- variable fonts
+
+  - 한 가지 파일만으로도 다양의 버전의 폰트를 가지고 있는 것
+  - https://fonts.google.com/variablefonts
+
+- 원하는 폰트는 최상위의 layout에서 사용하는 것이 좋다
