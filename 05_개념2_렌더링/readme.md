@@ -191,3 +191,25 @@ export default function MeowArticle() {
 - getServerSideProps
   - 서버에서 실행되는 함수
   - revalidate도 지정할 수 있다
+
+## 5.14 API 라우트란 무엇인가?
+
+- 우리는 지금 웹앱을 만들고 있다
+- Next.js에선 풀스택 커버가 가능하다
+- api 라우트에 함수를 등록해놓으면 서버처럼 동작한다
+  - 해당 api를 다른 클라이언트에게 api형태로 제공하고 싶다면 api 라우트를 사용하면 된다
+
+```ts
+// api/hello.ts
+import type { NextApiRequest, NextApiResponse } from "next";
+
+export default async function handler(
+  request: NextApiRequest,
+  response: NextApiResponse
+) {
+  response.status(200).json({ name: "John Doe" });
+}
+```
+
+- api/hello로 요청을 보내면 json 형태로 응답을 받을 수 있다
+- 반드시 export default로 함수를 만들어야 한다
