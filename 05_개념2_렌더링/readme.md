@@ -224,3 +224,5 @@ export default async function handler(
 
 - service에서 만들었던 함수를 재사용하자
 - pages 디렉토리에서 api 함수들은 method를 if문으로 구분해야 한다
+
+## 5.17 최신 방식의 라우트 핸들러
