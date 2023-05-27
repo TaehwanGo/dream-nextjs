@@ -167,3 +167,8 @@ export default function Error({
 ```tsx
 <Image src={clothesImage} alt="clothes" priority />
 ```
+
+## 6.6 ~ 6.7 제품 상세 페이지
+
+- products.json 데이터의 image를 추가하고 각 이미지 파일명 값을 지정해준다
+- 데이터 타입이 변경되었으므로 타입을 변경해준다

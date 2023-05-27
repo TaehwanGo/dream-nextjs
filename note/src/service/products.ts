@@ -5,6 +5,7 @@ export type Product = {
   id: string;
   name: string;
   price: number;
+  image: string;
 };
 
 // 재사용 가능한 모듈

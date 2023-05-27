@@ -2,7 +2,7 @@ import { getProducts } from "@/service/products";
 import Link from "next/link";
 import MeowArticle from "@/components/MeowArticle";
 import Image from "next/image";
-import clothesImage from "../../../public/images/clothes.jpeg";
+import clothesImage from "../../../public/images/clothes.jpeg"; // "public/images/clothes.jpeg" 과 동일
 
 // export const revalidate = 3;
 
@@ -14,7 +14,13 @@ export default async function ProductsPage() {
   return (
     <>
       <h3>Products Page</h3>
-      <Image src={clothesImage} alt="clothes" priority />
+      <Image
+        src={clothesImage}
+        alt="clothes"
+        priority
+        width={400}
+        height={400}
+      />
       <ul>
         {products.map((product, index) => (
           <li key={index}>
