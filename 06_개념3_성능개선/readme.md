@@ -27,3 +27,80 @@
 - React에서 제공하는 Suspense, Boundary를 사용하는 것과 동일하다
 - 해당 경로에 loading.tsx를 만들고 UI를 구성하면 된다
 - 전체 페이지가 다 대체된다
+
+## 6.3 병렬적으로 수행
+
+- 어떤 원리로 동작하는지 자세히 알아보자
+- 공식 문서
+  - https://nextjs.org/docs/app/api-reference/file-conventions/loading
+- 서버 컴포넌트와 클라이언트 컴포넌트 모두에서 사용할 수 있다
+- 해당 페이지가 layout같은 것을 사용하고 있다면 공통 layout을 제외하고 해당 컴포넌트에 해당하는 부분에만 loading이 적용된다
+- 내부적으론 React Suspense를 사용해서 구현되었다
+
+```tsx
+// 내부적으로 Suspense를 사용해서 구현된 예시
+export default function Loading() {
+  return <LoadingSkeleton />;
+}
+
+<Layout>
+  <Header />
+  <Suspense fallback={<Loading />}>
+    <Page />
+  </Suspense>
+</Layout>;
+```
+
+- 로딩 파일의 한계점
+
+  - 전체 페이지가 대체되기 때문에 필요한 곳에서 부분적으로 Suspense를 사용해도 된다
+
+- https://nextjs.org/docs/app/building-your-application/data-fetching#parallel-and-sequential-data-fetching
+  - 병렬적으로 데이터를 요청하면 더 빠르게 페이지를 로딩할 수 있다
+    - Promise.all을 사용해서 병렬적으로 요청할 수 있다
+    - https://nextjs.org/docs/app/building-your-application/data-fetching/fetching#parallel-data-fetching
+  - 하지만 Promise.all은 전부 로딩이 끝날 때 까지 기다려야 하므로 부분적으로 Suspense를 적용해서 부분적으로 로딩을 적용할 수도 있다
+
+```tsx
+// Suspense를 사용해서 부분적으로 로딩을 적용하는 예시
+import { getArtist, getArtistAlbums, type Album } from "./api";
+
+export default async function Page({
+  params: { username },
+}: {
+  params: { username: string };
+}) {
+  // Initiate both requests in parallel
+  const artistData = getArtist(username);
+  const albumData = getArtistAlbums(username);
+
+  // Wait for the artist's promise to resolve first
+  const artist = await artistData;
+
+  return (
+    <>
+      <h1>{artist.name}</h1>
+      {/* Send the artist information first,
+          and wrap albums in a suspense boundary */}
+      <Suspense fallback={<div>Loading...</div>}>
+        {/* @ts-expect-error Async Server Component */}
+        <Albums promise={albumData} />
+      </Suspense>
+    </>
+  );
+}
+
+// Albums Component
+async function Albums({ promise }: { promise: Promise<Album[]> }) {
+  // Wait for the albums promise to resolve
+  const albums = await promise;
+
+  return (
+    <ul>
+      {albums.map((album) => (
+        <li key={album.id}>{album.name}</li>
+      ))}
+    </ul>
+  );
+}
+```
