@@ -104,3 +104,47 @@ async function Albums({ promise }: { promise: Promise<Album[]> }) {
   );
 }
 ```
+
+## 6.4 에러 UI
+
+- loading은 React Suspense를 사용해서 구현되었다
+- 에러 UI는 React Error Boundary를 사용해서 구현된다
+- 공식 문서
+  - https://nextjs.org/docs/app/api-reference/file-conventions/error
+  - https://nextjs.org/docs/app/building-your-application/routing/error-handling
+- route별로 에러 UI를 구성할 수 있다
+
+```tsx
+"use client"; // Error components must be Client Components
+
+import { useEffect } from "react";
+
+export default function Error({
+  error,
+  reset,
+}: {
+  error: Error;
+  reset: () => void;
+}) {
+  useEffect(() => {
+    // Log the error to an error reporting service
+    console.error(error);
+  }, [error]);
+
+  return (
+    <div>
+      <h2>Something went wrong!</h2>
+      <button
+        onClick={
+          // Attempt to recover by trying to re-render the segment
+          () => reset()
+        }
+      >
+        Try again
+      </button>
+    </div>
+  );
+}
+```
+
+- 에러 컴포넌트는 클라이언트이므로 무조건 'use client'를 사용해야 한다

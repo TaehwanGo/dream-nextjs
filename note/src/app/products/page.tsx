@@ -5,6 +5,7 @@ import MeowArticle from "@/components/MeowArticle";
 // export const revalidate = 3;
 
 export default async function ProductsPage() {
+  // throw new Error("error from ProductsPage"); // 6.4 에러 테스트용
   // 서버 파일(데이터베이스)에 있는 제품의 리스트를 읽어와서, 그것을 보여줌
   const products = await getProducts();
 
