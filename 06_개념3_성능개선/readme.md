@@ -197,3 +197,17 @@ export default function Error({
   - https://fonts.google.com/variablefonts
 
 - 원하는 폰트는 최상위의 layout에서 사용하는 것이 좋다
+
+## 6.9 Redirect
+
+- 특정 페이지로 보내주는 것
+- next.config.js에서 설정할 수 있다
+- 초기 버전에서 설정했던 경로를 페이지 개편으로 인해 변경되었을 때 사용할 수 있다
+
+## 6.10 Rewrite
+
+- 내부적으로 복잡하고
+- 이상한 아이디
+- 보안상에 민감함 키가 포함된 것이 URL이 있다면
+- 이런 경우 일일이 타이핑하기 귀찮으므로 다른 것으로 대체하는 것
+- URL은 변경되지 않고 내부적으로만 변경된다
