@@ -218,3 +218,49 @@ export default function Error({
   - 고정된(정적인) 데이터를 저장
 - 무언가 동적으로 수행하고 싶다면?
   - 로그인된 사용자를 특정 페이지로 보내거나 하는 경우
+
+## 6.12 미들웨어
+
+- 공식 문서
+  - https://nextjs.org/docs/app/building-your-application/routing/middleware
+- app/api/[:path]/route.ts 에서 각 메소드(GET, POST, PUT, DELETE)에 대한 미들웨어를 적용할 수 있다
+- 그런데 만약 공통적으로 로그인 같은 것을 검사하고 싶다면 어떻게 해야할까?
+- 미들웨어 : 문지기 같은 역할
+- `미들웨어`는 `src 폴더에` 만들거나 만약 src 폴더를 사용하지 않는다면 프로젝트 최상위 폴더에 만들어야 한다
+- 제품 소개 같은 Link 태그에 마우스를 올리면
+  - Next.js는 미리 fetching을 해줘서 미들웨어가 해당 시점에 동작되는 것으로 보이는 것
+
+```ts
+import { NextRequest, NextResponse } from "next/server";
+
+export function middleware(request: NextRequest) {
+  console.log("미들웨어 테스트");
+  if (request.nextUrl.pathname.startsWith("/products/1004")) {
+    console.log("경로 리다이렉팅");
+    return NextResponse.redirect(new URL("/products", request.url)); // redirect('경로', 'base url')
+  }
+}
+
+// 미들웨어가 특정 경로에서만 실행되도록 설정
+export const config = {
+  matcher: ["/products/:path+"],
+};
+```
+
+강의에서 설명을 잘못해 드린게 있어서 정정합니다.
+
+정규표현식에서 \*과 +는 다른 의미예요
+
+\*: zero or more
+
++: one or more
+
+그러니깐,
+
+/products/:path\* path가 있거나(많거나) 없거나 둘 다 가능
+
+/products/:path+ path가 하나 또는 많거나
+
+고로, /produts/slug 다이나믹 경로에 해당하는 곳에서만 미들웨어 실행을 원할경우 아래와 같이 작성해 주셔야 해요
+
+/products/:path+

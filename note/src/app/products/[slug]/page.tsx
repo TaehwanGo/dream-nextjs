@@ -20,8 +20,8 @@ export default async function PantsPage({ params: { slug } }: Props) {
   const product = await getProduct(slug);
 
   if (!product) {
-    redirect("/products");
-    // notFound();
+    // redirect("/products");
+    notFound();
   }
 
   // 서버 파일에 있는 데이터 중 해당 제품의 정보를 찾아서 그걸 보여줌
