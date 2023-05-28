@@ -1,6 +1,7 @@
+import GoProductsButton from "@/components/GoProductsButton";
 import { getProduct, getProducts } from "@/service/products";
 import Image from "next/image";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export const revalidate = 3;
 
@@ -19,7 +20,8 @@ export default async function PantsPage({ params: { slug } }: Props) {
   const product = await getProduct(slug);
 
   if (!product) {
-    notFound();
+    redirect("/products");
+    // notFound();
   }
 
   // 서버 파일에 있는 데이터 중 해당 제품의 정보를 찾아서 그걸 보여줌
@@ -32,6 +34,8 @@ export default async function PantsPage({ params: { slug } }: Props) {
         width={300}
         height={300}
       />
+      {/* 서버 컴포넌트에서는 onClick을 처리할 수 없으므로 클라이언트 컴포넌트로 빼줘야 함 */}
+      <GoProductsButton />
     </div>
   );
 }
