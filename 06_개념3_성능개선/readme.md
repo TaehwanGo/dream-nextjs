@@ -158,6 +158,9 @@ export default function Error({
   - 자동 최적화
 - 인터넷 상에 있는 이미지는 어떻게 할까?
   - width, height을 지정해야 한다
+    - 부모 컴포넌트에 width, height이 지정이 되었다면 fill이라는 속성을 사용하면 Image태그에 지정하지 않아도 된다
+      - 부모 컴포넌트는 대신 static이면 안된다
+      - ObjectFit을 사용해서 이미지를 채울 수 있다
   - next.config.js에서도 등록을 해줘야 한다
 - Image 컴포넌트의 장점
 
@@ -165,6 +168,7 @@ export default function Error({
   - 사이즈가 정해져있고 그 영역을 차지하고 있기 때문에 layout shift가 발생하지 않는다
 
 - 한 페이지에서 이미지가 많은 경우 우선순위를 정할 수 있다
+- blur 옵션을 줄 수도 있다
 
 ```tsx
 <Image src={clothesImage} alt="clothes" priority />
