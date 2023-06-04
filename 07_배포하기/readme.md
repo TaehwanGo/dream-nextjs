@@ -32,3 +32,14 @@
 ## 7.3 CI/CD
 
 - vercel에 배포 후 github에 push하면 자동으로 배포가 된다
+  - 실제 현업에선 work flow를 따라서 배포를 한다
+
+## 7.4 개발자의 work flow
+
+- 브랜치를 하나 더 만든다(release)
+- release 브랜치 생성 후 push
+- vercel -> setting -> git
+  - https://vercel.com/taehwango/next-note-deploy -> setting -> git -> production 브랜치 변경
+- master에서 작업 후 배포하려면 release로 pull request를 보낸다(Squash and merge)
+  - Release v2.1
+    - 해당 릴리즈에 대한 설명
