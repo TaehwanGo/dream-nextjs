@@ -43,3 +43,11 @@
 - master에서 작업 후 배포하려면 release로 pull request를 보낸다(Squash and merge)
   - Release v2.1
     - 해당 릴리즈에 대한 설명
+
+## 7.5 공식 사이트 읽기
+
+- https://nextjs.org/docs/app/building-your-application/deploying
+- 일반적인 env파일에 있는 것은 client 컴포넌트에서 접근이 불가능
+  - getServerSideProps, getStaticProps에서만 접근 가능
+- 만약 client에서 접근가능한 환경변수(env 파일에 있는)가 필요하다면 `NEXT_PUBLIC_`을 붙여준다(보안에 취약)
+  - e.g. NEXT_PUBLIC_API_URL=http://localhost:3000/api/notes
