@@ -28,3 +28,7 @@
 - Dashboard
   - build log : 빌드 시 발생한 로그
   - Runtime log : 런타임 시 발생한 로그
+
+## 7.3 CI/CD
+
+- vercel에 배포 후 github에 push하면 자동으로 배포가 된다
