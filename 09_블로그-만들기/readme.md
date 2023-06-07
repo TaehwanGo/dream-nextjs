@@ -26,3 +26,19 @@ npx create-next-app@latest
 - header
 - body
 - footer
+
+## 9.5 페이지 레이아웃 만들기 - 스타일링
+
+- 우리가 원하는 것
+
+  - header
+    - 상위에 고정
+  - footer
+    - 하위에 고정
+  - main
+    - 가득 채우도록 설정
+
+- extensions
+  - tailwindcss intellisense
+  - headwind
+  - tailwind css highlight
