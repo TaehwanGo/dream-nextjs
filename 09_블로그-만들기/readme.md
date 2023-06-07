@@ -42,3 +42,5 @@ npx create-next-app@latest
   - tailwindcss intellisense
   - headwind
   - tailwind css highlight
+
+## 9.6 ~ 9.7 프로필 만들기
