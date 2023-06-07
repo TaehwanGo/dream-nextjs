@@ -3,7 +3,7 @@ import profileImage from "../../public/images/profile.png";
 import Link from "next/link";
 
 /**
- * Here : 웹 페이지를 상징하는 페이지
+ * Hero : 웹 페이지를 상징하는 페이지
  */
 export default function Hero() {
   return (

@@ -44,3 +44,5 @@ npx create-next-app@latest
   - tailwind css highlight
 
 ## 9.6 ~ 9.7 프로필 만들기
+
+- Hero : 웹 페이지를 상징하는 페이지
