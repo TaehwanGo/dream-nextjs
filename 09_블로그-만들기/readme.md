@@ -20,3 +20,9 @@ npx create-next-app@latest
 - tailwindcss 설치를 수동으로도 할 수 있다
   - 공식 문서 참고
     - https://nextjs.org/docs/app/building-your-application/styling/tailwind-css
+
+## 9.3 ~ 9.4 페이지 레이아웃 만들기
+
+- header
+- body
+- footer
