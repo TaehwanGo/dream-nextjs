@@ -59,3 +59,21 @@ npx create-next-app@latest
 - time tag
   - https://miaow-miaow.tistory.com/51
   - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time
+
+## 9.11 피쳐된 포스트 보여주기 - 스타일링
+
+- 엘리의 구현 순서
+
+  - 메인 로직
+  - 컴포넌트 골격
+  - 스타일링
+
+- Promise를 리턴하는 컴포넌트에서 발생하는 에러를 처리하는 방법
+  - 아직 타입스크립트팀에서 업데이트를 하지 않아서 발생하는 문제이다
+  - 아래와 같이 임시 무시하도록 처리하여 해결한다
+
+```tsx
+{
+  /* @ts-expect-error Async Server Component */
+}
+```

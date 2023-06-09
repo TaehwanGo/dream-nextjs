@@ -5,6 +5,7 @@ export default function HomePage() {
   return (
     <>
       <Hero />
+      {/* @ts-expect-error Async Server Component */}
       <FeaturedPosts />
     </>
   );
