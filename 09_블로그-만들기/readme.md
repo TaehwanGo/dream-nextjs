@@ -52,3 +52,10 @@ npx create-next-app@latest
 - service 폴더안에 비즈니스 로직을 구현해서 컴포넌트에서 코드를 분리
 - 컴포넌트가 데이터를 가져오는 과정
   - service에서 파일을 읽고 반환하는 함수를 분리해서 구현
+
+## 9.10 피쳐된 포스트 보여주기 - 카드
+
+- 파일에서 읽은 posts 중 featured가 true인 것만 가져온다
+- time tag
+  - https://miaow-miaow.tistory.com/51
+  - https://developer.mozilla.org/en-US/docs/Web/HTML/Element/time

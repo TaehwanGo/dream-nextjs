@@ -16,3 +16,8 @@ export async function getAllPosts(): Promise<Post[]> {
     .then<Post[]>(JSON.parse) // then의 return type을 제네릭으로 명시할 수 있다
     .then((posts) => posts.sort((a, b) => (a.date > b.date ? -1 : 1)));
 }
+
+export async function getFeaturedPosts(): Promise<Post[]> {
+  return getAllPosts() //
+    .then((posts) => posts.filter((post) => post.featured));
+}
