@@ -130,12 +130,12 @@ const categories = [...new Set(posts.map((post) => post.category))];
 - query param
   - https://github.com/vercel/next.js/discussions/47583
 
-<!-- 여기서 부터 따라 치면서 다시 들어야 함 -->
-
 ## 9.16 필터 가능한 포스트 페이지 - 스타일링
 
 - 선택된 포스트 카테고리에 스타일을 적용
   - post === selected && 'text-blue-500'
+
+<!-- 여기서 부터 따라 치면서 다시 들어야 함 -->
 
 ## 9.17 ~ 9.18 블로그 포스트 페이지
 
