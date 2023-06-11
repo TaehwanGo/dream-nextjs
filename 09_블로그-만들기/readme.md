@@ -112,8 +112,6 @@ npx create-next-app@latest
     >
 ```
 
-<!-- 여기서 부터 따라 치면서 다시 들어야 함 -->
-
 ## 9.14 ~ 9.15 필터 가능한 포스트 페이지 - 구현
 
 - 카테고리
@@ -123,6 +121,12 @@ npx create-next-app@latest
 ```ts
 const categories = [...new Set(posts.map((post) => post.category))];
 ```
+
+- 에러 발생
+  - Type 'Set<string>' can only be iterated through when using the '--downlevelIteration' flag or with a '--target' of 'es2015' or higher.ts(2802)
+  - tsconfig.json의 target을 es2015로 변경
+
+<!-- 여기서 부터 따라 치면서 다시 들어야 함 -->
 
 ## 9.16 필터 가능한 포스트 페이지 - 스타일링
 
