@@ -85,5 +85,61 @@ npx create-next-app@latest
   - npm i react-multi-carousel
 
 - 캐러셀 드래그 안되는 문제
+
   - Link(a 태그)에 draggable을 false로 설정
   - Image에 draggable을 false로 설정
+
+- 캐러셀에서 드래그할 땐 페이지 이동을 하지 않고 클릭했을 때만 페이지 이동하게 하기
+
+```tsx
+  const [startPosition, setStartPosition] = useState(0);
+  const [endPosition, setEndPosition] = useState(0);
+    <Link
+      href={`/posts/${path}`}
+      draggable="false"
+      onClick={(e) => {
+        // prevent link if user is dragging
+        if (Math.abs(startPosition - endPosition) > 10) {
+          e.preventDefault();
+        }
+      }}
+      onMouseDown={(e) => {
+        console.log("mousedown", e.clientX);
+        setStartPosition(e.clientX);
+      }}
+      onMouseMove={(e) => {
+        console.log("mousemove", e.clientX, startPosition);
+        setEndPosition(e.clientX);
+      }}
+    >
+```
+
+<!-- 여기서 부터 따라 치면서 다시 들어야 함 -->
+
+## 9.14 ~ 9.15 필터 가능한 포스트 페이지 - 구현
+
+- 카테고리
+  - 중복 제거
+    - Set을 사용해서 제거
+
+```ts
+const categories = [...new Set(posts.map((post) => post.category))];
+```
+
+## 9.16 필터 가능한 포스트 페이지 - 스타일링
+
+- 선택된 포스트 카테고리에 스타일을 적용
+  - post === selected && 'text-blue-500'
+
+## 9.17 ~ 9.18 블로그 포스트 페이지
+
+- 선택 -> 포스트 페이지로 이동
+
+- 다이나믹 라우트
+  - src/app/post/[slug]/page.tsx
+
+1. 전달된 slug에 해당된 포스트를 가져와서
+2. 마크다운 뷰어에 표시
+
+- 제목은 h2로 표시
+- markdown은 pre로 표시

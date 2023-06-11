@@ -1,6 +1,9 @@
+"use client";
+
 import { Post } from "@/service/posts";
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 interface PostCardProps {
   post: Post;
@@ -9,8 +12,27 @@ interface PostCardProps {
 export default function PostCard({
   post: { title, description, date, path, category },
 }: PostCardProps) {
+  const [startPosition, setStartPosition] = useState(0);
+  const [endPosition, setEndPosition] = useState(-100);
   return (
-    <Link href={`/posts/${path}`} draggable="false">
+    <Link
+      href={`/posts/${path}`}
+      draggable="false"
+      onClick={(e) => {
+        // prevent link if user is dragging
+        if (Math.abs(startPosition - endPosition) > 10) {
+          e.preventDefault();
+        }
+      }}
+      onMouseDown={(e) => {
+        console.log("mousedown", e.clientX);
+        setStartPosition(e.clientX);
+      }}
+      onMouseMove={(e) => {
+        console.log("mousemove", e.clientX, startPosition);
+        setEndPosition(e.clientX);
+      }}
+    >
       <article className="overflow-hidden rounded-md shadow-md hover:shadow-lg">
         <Image
           className="w-full"

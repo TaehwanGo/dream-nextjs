@@ -9,11 +9,9 @@ export default function Hero() {
   return (
     <section className="text-center ">
       <Image
-        className="mx-auto rounded-full"
+        className="mx-auto rounded-full  w-[250px] h-[250px] object-cover"
         src={profileImage}
         alt="picture of the author"
-        // width={250}
-        style={{ objectFit: "cover", width: "250px", height: "250px" }}
         priority
       />
       <h2 className="mt-2 text-3xl font-bold ">{"Hi, I'm Tony"}</h2>
