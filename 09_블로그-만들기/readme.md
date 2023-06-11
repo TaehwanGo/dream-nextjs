@@ -104,11 +104,9 @@ npx create-next-app@latest
         }
       }}
       onMouseDown={(e) => {
-        console.log("mousedown", e.clientX);
         setStartPosition(e.clientX);
       }}
       onMouseMove={(e) => {
-        console.log("mousemove", e.clientX, startPosition);
         setEndPosition(e.clientX);
       }}
     >
