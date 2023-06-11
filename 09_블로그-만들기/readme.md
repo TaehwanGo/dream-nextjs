@@ -77,3 +77,13 @@ npx create-next-app@latest
   /* @ts-expect-error Async Server Component */
 }
 ```
+
+## 9.12 ~ 9.13 캐러셀 포스트 보여주기
+
+- 캐러셀 라이브러리
+
+  - npm i react-multi-carousel
+
+- 캐러셀 드래그 안되는 문제
+  - Link(a 태그)에 draggable을 false로 설정
+  - Image에 draggable을 false로 설정

@@ -6,7 +6,7 @@ export default async function FeaturedPosts() {
   const posts = await getFeaturedPosts();
   // 2. 모든 포스트 데이터를 보여줌
   return (
-    <section className="p-4">
+    <section className="my-4">
       <h2 className="my-2 text-2xl font-bold">Featured Posts</h2>
       <PostsGrid posts={posts} />
     </section>

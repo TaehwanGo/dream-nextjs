@@ -10,17 +10,18 @@ export default function PostCard({
   post: { title, description, date, path, category },
 }: PostCardProps) {
   return (
-    <Link href={`/posts/${path}`}>
-      <article className="overflow-hidden rounded-md shadow-lg">
+    <Link href={`/posts/${path}`} draggable="false">
+      <article className="overflow-hidden rounded-md shadow-md hover:shadow-lg">
         <Image
           className="w-full"
           src={`/images/posts/${path}.png`}
           alt={title}
           width={300}
           height={200}
+          draggable="false"
         />
         <div className="flex flex-col items-center">
-          <time className="self-end" dateTime={date.toString()}>
+          <time className="self-end text-gray-700" dateTime={date.toString()}>
             {date.toString()}
           </time>
           <h3 className="text-lg font-bold">{title}</h3>
