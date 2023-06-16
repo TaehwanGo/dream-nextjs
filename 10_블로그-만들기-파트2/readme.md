@@ -55,3 +55,9 @@ npm i --save-dev @types/react-syntax-highlighter
 ```
 
 - https://www.npmjs.com/package/react-markdown#use-custom-components-syntax-highlight
+
+## 10.5 이전, 다음 포스트 카드 버튼 만들기 안내
+
+## 10.6 이전, 다음 포스트 카드 버튼 만들기 - 리팩터링
+
+- 컴포넌트가 비대해지면 분리하자
