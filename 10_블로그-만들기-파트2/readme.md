@@ -191,3 +191,39 @@ export default function ContactForm() {
   - 서버에서 실행
   - POST
     - 메일을 보내고 응답을 보내줌
+
+## 10.15 이메일 보내기 - 서버 라우트
+
+- 노드메일러
+
+  - https://nodemailer.com/about/
+  - createTextAccount
+  - 계정 설정
+    - createTransport
+  - sendMail
+
+- 메일 계정은 .env.local에 저장한다
+
+  - gitignore에 설정하고 서버에서 환경변수로 사용한다
+
+- gmail 사용
+
+  - Google Account > Security > Signing in to Google
+    - 2-Step Verification 설정하기 > App password
+      - app password를 생성한다
+        - select app : Mail
+        - select device : Other (Custom name) => Blog
+      - 생성된 app password를 .env.local에 저장한다
+
+- api/contact/route.ts 에서 메일을 보내지만 외부 라이브러리를 사용할 땐 파일을 분리해서 사용한다
+  - service/email.ts
+
+#### 에러: http://localhost:3000/api/contact 400 (Bad Request)
+
+- request.body => request.body ReadableStream { locked: false, state: 'readable', supportsBYOB: false }
+- ReadableStream
+  - API route의 body는 노드에서 사용하는 Request와 동일
+  - body는 ReadableStream이다
+  - https://nodejs.org/api/stream.html#stream_readable_streams
+  - await을 이용해서 json으로 변환해줘야 함
+    - const body = await request.body();
