@@ -155,3 +155,39 @@ export default function ContactForm() {
 ## 10.12 정보, 연락 페이지 - 배너
 
 - 이메일을 잘 보냈는지 아닌지 보여주는 배너(banner: 신문의 맨 위에 있는 큰 제목)
+
+## 10.13 이메일 보내기 - 안내
+
+- 이메일을 보내는 방법은 여러가지가 있다
+  - https://www.npmjs.com/package/nodemailer
+- 유효성 검사
+  - yup
+    - https://www.npmjs.com/package/yup
+
+## 10.14 이메일 보내기 - 클라이언트
+
+- submit 이 발생
+- 서버 API 라우트에서 이메일을 보낸다
+- service 폴더 : 비즈니스 로직
+- app/api
+  - [path]/route.ts
+    - 해당 파일에서 HTTP 메소드별 API 라우트를 정의한다
+
+#### 프로세스 정리
+
+- ContactForm
+
+  - 클라이언트 컴포넌트
+  - form 데이터를 submit
+
+- service/contact
+
+  - sendContactEmail
+    - 클라이언트에서 실행
+    - 비동기로 메일 데이터를 요청
+      - fetch
+
+- api/contact/route.ts
+  - 서버에서 실행
+  - POST
+    - 메일을 보내고 응답을 보내줌
