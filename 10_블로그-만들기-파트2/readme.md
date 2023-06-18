@@ -86,3 +86,72 @@ npm i --save-dev @types/react-syntax-highlighter
     - noreferrer(노리퍼러)를 지정하면 다른 페이지로 이동할 때, 링크를 건 페이지의 주소 등의 정보를 브라우저가 Referer: HTTP 헤더로 리퍼러(referer 또는 referrer)로서 송신하지 않습니다.
   - nofollow
     - 예를 들어 nofollow을 사용하면 검색 엔진이 해당 링크를 크롤링하지 않을 수 있습니다. 검색 대상이 아닌 로그인 페이지 링크를 이렇게 설정할 수 있습니다.
+
+## 10.11 정보, 연락 페이지 - 입력폼
+
+- form 은 클라이언트에서 실행되어야 하므로 클라이언트 컴포넌트
+
+```tsx
+export default function ContactForm() {
+  const [form, setForm] = useState<Form>({
+    from: "",
+    subject: "",
+    message: "",
+  });
+
+  // onChange에서 event.target name으로 각 input 또는 textarea의 name을 사용해서 setState를 해준다
+  const onChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = event.target;
+    setForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    console.log(form);
+  };
+
+  return (
+    <>
+      <form onSubmit={onSubmit}>
+        <label htmlFor="from">Your Email</label>
+        <input
+          type="email"
+          id="from"
+          name="from"
+          required
+          autoFocus
+          value={form.from}
+          onChange={onChange}
+        />
+        <label htmlFor="subject">Your Email</label>
+        <input
+          type="text"
+          id="subject"
+          name="subject"
+          required
+          value={form.subject}
+          onChange={onChange}
+        />
+        <label htmlFor="message">Your Email</label>
+        <textarea
+          rows={10} // 총 줄 수
+          id="message"
+          name="message"
+          required
+          value={form.message}
+          onChange={onChange}
+        />
+        <button type="submit">submit</button>
+      </form>
+    </>
+  );
+}
+```
+
+- onChange에서 event name으로 각 input 또는 textarea의 name을 사용해서 setState를 해준다
+
+## 10.12 정보, 연락 페이지 - 배너
+
+- 이메일을 잘 보냈는지 아닌지 보여주는 배너(banner: 신문의 맨 위에 있는 큰 제목)
