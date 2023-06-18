@@ -1,5 +1,6 @@
 import { readFile } from "fs/promises";
 import path from "path";
+import { cache } from "react";
 
 export type Post = {
   title: string;
@@ -16,12 +17,22 @@ export interface PostData extends Post {
   prev: Post | null;
 }
 
-export async function getAllPosts(): Promise<Post[]> {
+// 10.18 성능 개선을 위한 코드
+export const getAllPosts = cache(async () => {
+  console.log("getAllPosts");
   const filePath = path.join(process.cwd(), "data", "posts.json");
   return readFile(filePath, "utf-8")
     .then<Post[]>(JSON.parse) // then의 return type을 제네릭으로 명시할 수 있다
     .then((posts) => posts.sort((a, b) => (a.date > b.date ? -1 : 1)));
-}
+});
+
+// 10.18 이전 성능 개선 전 코드
+// export async function getAllPosts(): Promise<Post[]> {
+//   const filePath = path.join(process.cwd(), "data", "posts.json");
+//   return readFile(filePath, "utf-8")
+//     .then<Post[]>(JSON.parse) // then의 return type을 제네릭으로 명시할 수 있다
+//     .then((posts) => posts.sort((a, b) => (a.date > b.date ? -1 : 1)));
+// }
 
 export async function getFeaturedPosts(): Promise<Post[]> {
   return getAllPosts() //

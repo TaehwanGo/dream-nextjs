@@ -235,3 +235,30 @@ export default function ContactForm() {
   - https://www.png2ico.com/
 - favicon.ico 위치
   - src/app/
+
+## 10.18 성능 개선 및 점검
+
+### 서버 데이터 캐싱
+
+- fetch를 사용하면 Next.js에서 자동으로 중복 요청은 하나의 요청으로 처리 함
+- 하지만 getAllPosts 같은 경우 중복 제거 처리가 되지 않는다
+  - react에서 제공하는 cache 메소드를 사용하면 된다
+- cache
+  - 서버 동작 시간이 아니라
+  - 한번 렌더링 되는 사이클에 한에서 캐시를 해줌
+- 참고
+  - https://nextjs.org/docs/app/building-your-application/data-fetching/caching
+
+### 자주 사용하는 슬러그 미리 만들어두기
+
+```tsx
+// app/posts/[slug]/page.tsx
+export async function generateStaticParams() {
+  const posts = await getFeaturedPosts();
+  return posts.map(({ path }) => ({
+    params: {
+      slug: path,
+    },
+  }));
+}
+```
