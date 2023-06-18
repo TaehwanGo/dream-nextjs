@@ -262,3 +262,23 @@ export async function generateStaticParams() {
   }));
 }
 ```
+
+## 10.19 버전 12에서는 이렇게
+
+#### 13버전의 metadata
+
+```tsx
+<Head>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+</Head>
+```
+
+#### 13버전의 generateStaticParams
+
+- 13버전 : generateStaticParams()
+
+  - https://nextjs.org/docs/app/api-reference/functions/generate-static-params
+
+- 12버전 : getStaticPaths()
+  - https://nextjs.org/docs/pages/building-your-application/data-fetching/get-static-paths
