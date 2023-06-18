@@ -227,3 +227,11 @@ export default function ContactForm() {
   - https://nodejs.org/api/stream.html#stream_readable_streams
   - await을 이용해서 json으로 변환해줘야 함
     - const body = await request.body();
+
+## 10.16 ~ 17 SEO 최적화
+
+- metadata를 동적으로 변경해보자
+- png to favicon
+  - https://www.png2ico.com/
+- favicon.ico 위치
+  - src/app/

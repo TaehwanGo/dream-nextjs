@@ -1,5 +1,11 @@
 import ContactForm from "@/components/ContactForm";
+import { Metadata } from "next";
 import { AiFillGithub } from "react-icons/ai";
+
+export const metadata: Metadata = {
+  title: "Contact Me",
+  description: "Tony에게 메일 보내기",
+};
 
 const LINKS = [
   {
