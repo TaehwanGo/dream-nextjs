@@ -86,13 +86,14 @@ export default function ContactForm() {
           Message
         </label>
         <textarea
-          rows={10} // 총 줄 수
+          rows={10} // 첫 크기 제한
           id="message"
           name="message"
           required
           value={form.message}
           onChange={onChange}
           className="text-black"
+          maxLength={1000}
         />
         <button
           type="submit"
