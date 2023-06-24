@@ -67,3 +67,43 @@
 
 - sanity-studio가 설치된 폴더에서 `npm run dev`
   - content-lake(클라우드 데이터베이스)와 연결된 sanity studio가 실행됨
+
+## 12.5 Sanity 공식사이트 읽기
+
+### Create a schema
+
+#### What is Sanity Studio?
+
+- 자바스크립트 문법으로 데이터 모델을 정의할 수 있음
+- Sanity Studio는 SPA로 만들어짐
+  - React로 만들어짐
+  - 따로 배포해서 관리도 가능
+- 데이터는 클라우드에 저장되어있다(로컬이 아님)
+- 스튜디오를 실행하는 것은 어드민(sanity-studio)를 위한 앱이 실행
+  - sanity-studio에서 npm run dev
+
+#### Defining your first document type
+
+```js
+// schemas/pet.js
+export default {
+  name: "pet", // 데이터 이름
+  type: "document", // 타입 : 문서
+  title: "Pet", // 스튜디오에 표시될 이름
+  fields: [
+    // 해당 데이터에 속한 필드
+    {
+      name: "name", // 필드 이름
+      type: "string", // 필드 타입
+      title: "Name", // 스튜디오에 표시될 이름
+    },
+  ],
+};
+
+// schemas/index.js
+import pet from "./pet";
+
+export const schemaTypes = [pet];
+```
+
+- 자동으로 Content Lake로 동기화
