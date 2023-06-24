@@ -24,3 +24,46 @@
 
 - 프로젝트 생성
   - tailwind 포함
+
+## 12.4 Sanity 셋업
+
+### 선택 사항
+
+1. Sanity Studio를 프로젝트 안에 만들 것인지
+2. 아니면 프로젝트와 별개의 폴더에 둘 것인지
+
+중요한 것은 Sanity Studio는 Next.js 프로젝트의 일부가 아님
+
+- 하나의 깃 레포로 관리하려면 Next.js 프로젝트 안에 만들어도 됨
+
+### 설치
+
+- (첫 질문)Would you like to add configuration files for a Sanity project in this Next.js folder?
+  - n 선택
+
+### sanity 관련 명령어
+
+- sanity docs - to open the documentation in a browser
+- sanity manage - to open the project settings in a browser
+- sanity help - to explore the CLI manual
+
+### sanity studio
+
+- 하나의 독립된 프로젝트
+- React로 만들어짐
+
+#### 폴더
+
+- schemas
+  - 데이터 모델 정의
+
+### 이슈
+
+- `[vite] Internal server error: [postcss] Cannot read properties of undefined (reading 'config')`
+  - tailwind.config.js 파일이 없어서 발생하는 문제
+  - tailwind.config.js 파일을 복사해서 그래도 붙여넣어줌
+
+### 실행
+
+- sanity-studio가 설치된 폴더에서 `npm run dev`
+  - content-lake(클라우드 데이터베이스)와 연결된 sanity studio가 실행됨
