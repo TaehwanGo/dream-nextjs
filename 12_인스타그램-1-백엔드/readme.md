@@ -107,3 +107,5 @@ export const schemaTypes = [pet];
 ```
 
 - 자동으로 Content Lake로 동기화
+
+## 12.6 사용자 스키마 정의
