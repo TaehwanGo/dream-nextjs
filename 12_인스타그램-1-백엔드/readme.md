@@ -226,3 +226,32 @@ export default {
   - useSession 등 사용 가능
 - 13 버전에선 Provider 설정을 어디서 해야 하는지 알아보자
   - 12버전 : \_app.js에서 했었음
+
+## 12.15 로그인 구현 - 프론트엔드
+
+- 클라이언트 컴포넌트로 만들어야 함
+  - 서버컴포넌트에선 접근 할 수 없음
+- Provider는 app/layout.tsx에서 사용
+
+### 400 오류: redirect_uri_mismatch
+
+- 구글 클라우드 콘솔 -> api -> credentials(사용자 인증 정보) -> 내 앱 클릭(instagram-tony)
+  - 승인된 자바스크립트 원본(Authorised Javascript origins)
+    - 브라우저 요청에 사용(For use with requests from a browser)
+      - http://localhost:3000
+  - 승인된 리디렉션 URI(Authorised redirect URIs)
+    - 웹 서버의 요청에 사용(For use with requests from a web server)
+      - http://localhost:3000/api/auth/callback/google
+
+### Warning
+
+- 경고 메시지
+
+  - [next-auth][warn][NEXTAUTH_URL]
+    - https://next-auth.js.org/warnings#nextauth_url
+  - [next-auth][warn][NO_SECRET]
+    - https://next-auth.js.org/warnings#no_secret
+
+- 해결
+  - .env.local 파일에 NEXTAUTH_URL, NEXTAUTH_SECRET 추가
+- https://www.strongpasswordgenerator.org/
