@@ -255,3 +255,67 @@ export default {
 - 해결
   - .env.local 파일에 NEXTAUTH_URL, NEXTAUTH_SECRET 추가
 - https://www.strongpasswordgenerator.org/
+
+## 12.16 로그인 페이지 구현 - 소개
+
+- 로그인 후 원래 있던 페이지로 돌아가기
+- 로그인 하면 프로필 사진이 보여지고
+  - 해당 프로필 클릭 시 유저 개인 페이지로 이동
+- 참고
+
+  - https://next-auth.js.org/configuration/pages
+  - https://next-auth.js.org/getting-started/client#specifying-a-callbackurl
+  - https://next-auth.js.org/configuration/callbacks#session-callback
+
+## 12.17 로그인 페이지 구현 - 페이지
+
+- https://next-auth.js.org/configuration/pages
+
+### 공식 문서의 version 12 코드
+
+```tsx
+import type {
+  GetServerSidePropsContext,
+  InferGetServerSidePropsType,
+} from "next";
+import { getProviders, signIn } from "next-auth/react";
+import { getServerSession } from "next-auth/next";
+import { authOptions } from "../api/auth/[...nextauth]";
+
+export default function SignIn({
+  providers,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) {
+  return (
+    <>
+      {Object.values(providers).map((provider) => (
+        <div key={provider.name}>
+          <button onClick={() => signIn(provider.id)}>
+            Sign in with {provider.name}
+          </button>
+        </div>
+      ))}
+    </>
+  );
+}
+
+export async function getServerSideProps(context: GetServerSidePropsContext) {
+  const session = await getServerSession(context.req, context.res, authOptions);
+
+  // If the user is already logged in, redirect.
+  // Note: Make sure not to redirect to the same page
+  // To avoid an infinite loop!
+  if (session) {
+    return { redirect: { destination: "/" } };
+  }
+
+  const providers = await getProviders();
+
+  return {
+    props: { providers: providers ?? [] },
+  };
+}
+```
+
+### 공식 문서의 version 13 코드
+
+- git history 참고
