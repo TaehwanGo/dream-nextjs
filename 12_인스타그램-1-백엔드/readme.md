@@ -190,3 +190,39 @@ export default {
   - 사용 방법
     - https://next-auth.js.org/getting-started/example
     - https://next-auth.js.org/configuration/initialization#route-handlers-app
+
+## 12.14 로그인 구현 - 백엔드
+
+- 설치
+  - npm install next-auth
+- api route 추가
+
+### google oauth 사용
+
+- google cloud에서 credentials 생성
+
+  - project 생성
+  - 대시보드
+    - API 카드의 "API 개요로 이동" 클릭
+      - 왼쪽 Nav에 Oauth consent screen
+
+#### Auth 동의 화면(Oauth consent screen)
+
+- 외부
+- 나중에 배포 후 domain 지정할 수 있음
+
+#### 사용자 인증 정보(Credentials)
+
+- 사용자 인증 정보 만들기 클릭
+
+  - OAuth client Id 클릭
+
+- 웹 어플리케이션
+- 클라이언트 아이디, 클라이언트 보안 비밀 생성
+
+#### TODO
+
+- 클라이언트에서 세션 프로바이더 설정
+  - useSession 등 사용 가능
+- 13 버전에선 Provider 설정을 어디서 해야 하는지 알아보자
+  - 12버전 : \_app.js에서 했었음
