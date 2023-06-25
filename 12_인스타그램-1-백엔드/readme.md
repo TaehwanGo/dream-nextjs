@@ -319,3 +319,54 @@ export async function getServerSideProps(context: GetServerSidePropsContext) {
 ### 공식 문서의 version 13 코드
 
 - git history 참고
+
+## 12.18 로그인 페이지 구현 - 아바타
+
+- 로그인한 사용자 정보를 navbar에 표시해보자
+- 세션 정보를 가져오는 방법
+  - useSession
+  - getSession
+
+```tsx
+// app/api/auth/[...nextauth]/route.ts
+...
+callbacks: {
+  async jwt({ token, account }) {
+    // Persist the OAuth access_token to the token right after signin
+    if (account) {
+      token.accessToken = account.access_token
+    }
+    return token
+  },
+  async session({ session, token, user }) {
+    // Send properties to the client, like an access_token from a provider.
+    session.accessToken = token.accessToken
+    return session
+  }
+}
+...
+```
+
+- 세션 데이터 확인
+
+```ts
+callbacks: {
+    async session({ session }) {
+      // Send properties to the client, like an access_token from a provider.
+      console.log(session);
+      return session;
+    },
+  },
+```
+
+```
+# session data console.log
+{
+  user: {
+    name: 'Tony',
+    email: 'gth1123z@gmail.com',
+    image: 'https://lh3.googleusercontent.com/a/AAcHTtdSB6EwBBRTgZlw2zZHrrgNzOU0L0IfW3lgIMSI3amAatw=s96-c'
+  },
+  expires: '2023-07-25T06:04:55.637Z'
+}
+```
