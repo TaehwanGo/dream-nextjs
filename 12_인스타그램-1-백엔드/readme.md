@@ -113,3 +113,55 @@ export const schemaTypes = [pet];
 ## 12.7 포스트 스키마 정의
 
 - image 타입은 어떻게 저장할까?
+
+## 12.8 데이터 추가하기
+
+- sanity studio에서 데이터 추가하기
+
+## 12.9 멋진 프리뷰 만들기
+
+- Sanity studio란?
+  - 어드민용 웹 어플리케이션
+- 어디에서 동작
+  - 지금은 로컬에서 동작
+  - 다른 곳에 배포하면 다른곳에서 동작하게 할 수 있음
+- 데이터는 어디에 있나요?
+  - Content lake라는 클라우드
+- 웹 어플리케이션 이기 때문에 조작이 가능하다
+
+### 프리뷰
+
+- https://www.sanity.io/docs/previews-list-views
+
+```js
+export default {
+  name: "movie",
+  type: "document",
+  fields: [
+    {
+      title: "Title",
+      name: "title",
+      type: "string",
+    },
+    {
+      title: "Release Date",
+      name: "releaseDate",
+      type: "datetime",
+    },
+  ],
+  preview: {
+    select: {
+      title: "title",
+      date: "releaseDate",
+    },
+    prepare(selection) {
+      // selection : {title, date} <- select에서 정의한 것이 객체로 전달
+      const { title, date } = selection;
+      return {
+        title: title,
+        subtitle: date.split("-")[0], // YYYY-MM-DD --> YYYY
+      };
+    },
+  },
+};
+```

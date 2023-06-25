@@ -52,4 +52,20 @@ export default {
       ],
     },
   ],
+  preview: {
+    select: {
+      title: 'comments.0.comment', // comments 배열의 0번째 comment
+      authorName: 'author.name', // author의 name
+      authorUsername: 'author.username', // author의 username
+      media: 'photo', // photo
+    },
+    prepare(selection: {title: string; authorName: string; authorUsername: string; media: any}) {
+      const {title, authorName, authorUsername, media} = selection
+      return {
+        title,
+        subtitle: `by ${authorName} (${authorUsername})`,
+        media,
+      }
+    },
+  },
 }
