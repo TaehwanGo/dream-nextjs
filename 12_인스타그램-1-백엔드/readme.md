@@ -370,3 +370,41 @@ callbacks: {
   expires: '2023-07-25T06:04:55.637Z'
 }
 ```
+
+## 12.19 데이터베이스에 사용자 추가 - 소개
+
+- 참고
+  - https://www.sanity.io/docs/connect-your-content
+  - https://www.sanity.io/docs/js-client#quickstart
+  - https://www.sanity.io/docs/js-client#creating-if-not-already-present
+- 사용자가 로그인하면 Sanity에게 새로운 사용자를 추가
+
+## 12.20 데이터 베이스에 사용자 추가
+
+```bash
+npm install @sanity/client
+```
+
+```ts
+import { createClient } from "@sanity/client";
+
+export const client = createClient({
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATASET,
+  useCdn: false, // set to `false` to bypass the edge cache - 동적인 데이터가 들어있으므로 false
+  apiVersion: "2023-06-25", // use current date (YYYY-MM-DD) to target the latest API version
+  token: process.env.SANITY_SECRET_TOKEN, // Only if you want to update content with the client - 데이터를 업데이트 하므로 토큰이 필요
+});
+```
+
+- 환경변수 처리한 정보는 .env.local 파일에 추가
+- https://www.sanity.io/manage
+  - 위 링크에서 해당 프로젝트 선택 후 각 환경변수에 대한 정보를 확인할 수 있다.
+    - dataset
+    - projectId
+    - token
+      - API > Add API token
+
+#### https://www.sanity.io/docs/js-client#creating-if-not-already-present
+
+- 있으면 만들지 않고 없으면 만드는 방법
