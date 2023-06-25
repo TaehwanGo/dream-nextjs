@@ -1,3 +1,5 @@
+import { Rule } from "sanity";
+
 export default {
   title: 'User',
   name: 'user',
@@ -37,7 +39,7 @@ export default {
           to: [{type: 'user'}],
         },
       ],
-      validation: (Rule: any) => Rule.unique(),
+      validation: (Rule: Rule) => Rule.unique(),
     },
     {
       // 사용자를 팔로우하는 사람들
@@ -50,7 +52,7 @@ export default {
           to: [{type: 'user'}],
         },
       ],
-      validation: (Rule: any) => Rule.unique(),
+      validation: (Rule: Rule) => Rule.unique(),
     },
     {
       title: 'Bookmarks',
@@ -62,7 +64,7 @@ export default {
           to: [{type: 'post'}],
         },
       ],
-      validation: (Rule: any) => Rule.unique(),
+      validation: (Rule: Rule) => Rule.unique(),
     },
   ],
   preview: {
