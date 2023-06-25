@@ -109,3 +109,7 @@ export const schemaTypes = [pet];
 - 자동으로 Content Lake로 동기화
 
 ## 12.6 사용자 스키마 정의
+
+## 12.7 포스트 스키마 정의
+
+- image 타입은 어떻게 저장할까?
