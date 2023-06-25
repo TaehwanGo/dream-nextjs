@@ -175,3 +175,18 @@ export default {
 - icon도 재사용 가능한 컴포넌트로 추상화하자
 
 ## 12.12 골격, Navbar 만들기 - 스타일링
+
+## 12.13 로그인 구현 - 소개
+
+- 로그인 -> 구글 로그인 -> 로그인 성공 -> 텍스트 변경
+- NextAuth.js 라이브러리 사용
+
+### Add API route
+
+- 12버전 => pages/api/auth
+- 13버전에서의 api는 edge 환경에서 동작할 수 있게 만들어야 함
+  - 우리 코드 뿐만 아니라 라이브러리들도 edge 환경에 적합하게 만들어야 함
+- next-auth의 api는 13버전이 이제 지원됨
+  - 사용 방법
+    - https://next-auth.js.org/getting-started/example
+    - https://next-auth.js.org/configuration/initialization#route-handlers-app
