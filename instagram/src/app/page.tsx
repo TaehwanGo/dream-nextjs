@@ -6,7 +6,7 @@ import { authOptions } from "./api/auth/[...nextauth]/route";
 import { redirect } from "next/navigation";
 
 export default async function HomePage() {
-  const session = await getServerSession(authOptions);
+  const session = await getServerSession(authOptions); // SSR
   console.log("session", session);
   const user = session?.user;
 

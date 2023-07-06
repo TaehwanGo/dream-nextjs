@@ -9,7 +9,7 @@ export default function SideBar({
   user: { name, username, image },
 }: SideBarProps) {
   return (
-    <>
+    <article className="flex flex-col">
       <div className="flex items-center">
         {image && <Avatar image={image} />}
         <div className="ml-4">
@@ -24,6 +24,6 @@ export default function SideBar({
       <p className="mt-8 text-sm font-bold text-neutral-500">
         @Copyright instangram from Tony
       </p>
-    </>
+    </article>
   );
 }
