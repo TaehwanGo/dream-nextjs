@@ -62,3 +62,49 @@ function Profile() {
   return <div>hello {data.name}!</div>;
 }
 ```
+
+## 13.7 팔로잉바 - 서비스 구현
+
+## 13.8 팔로잉바 - GROQ 쿼리
+
+- Sanity에서 사용하는 Query 언어
+  - https://www.sanity.io/docs/groq
+- Graph-Relational Object Queries
+  - 숨겨진 아이디어 : 어플리케이션에서 필요한 정보를 정확하게 묘사한다
+  - 여러가지 데이터셋을 조인해서 쓸 수도 있다
+- 내가 어떤 필드를 받고 싶은지도 명시 할 수 있다
+
+```ts
+// src/service/sanity.ts
+import { createClient } from "@sanity/client";
+
+export const client = createClient({
+  projectId: process.env.SANITY_PROJECT_ID,
+  dataset: process.env.SANITY_DATASET,
+  useCdn: false, // set to `false` to bypass the edge cache - 동적인 데이터가 들어있으므로 false
+  apiVersion: "2023-06-25", // use current date (YYYY-MM-DD) to target the latest API version
+  token: process.env.SANITY_SECRET_TOKEN, // Only if you want to update content with the client - 데이터를 업데이트 하므로 토큰이 필요
+});
+
+// src/service/user.ts
+import groq from "groq";
+import { client } from "./sanity";
+
+export async function getUserByUsername(username: string) {
+  return client.fetch(
+    groq`*[_type == "user" && username == "${username}"][0]{
+      ...,
+      "_id": _id,
+      following[]->{username, image},
+      followers[]->{username, image},
+      "bookmarks": bookmarks[]->_id
+    }`
+  );
+}
+```
+
+- groq라이브러리는 별다른 기능은 없지만 에디터에서 해당 템플릿 리터럴은 groq 쿼리라고 인식하게 해준다
+
+- sanity studio 실행 후 vision탭에서 groq 쿼리를 테스트 해볼 수 있다
+
+## 13.9 팔로잉바 - 컴포넌트
