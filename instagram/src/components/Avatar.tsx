@@ -21,7 +21,7 @@ export default function Avatar({
       <img
         src={image ?? undefined}
         alt="user profile"
-        className={`bg-white rounded-full p-[0.1rem] ${getContainerStyle}`}
+        className={`bg-white rounded-full p-[0.1rem] object-cover ${getContainerStyle}`}
         referrerPolicy="no-referrer"
       />
     </div>
