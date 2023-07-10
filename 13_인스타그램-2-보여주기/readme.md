@@ -108,3 +108,10 @@ export async function getUserByUsername(username: string) {
 - sanity studio 실행 후 vision탭에서 groq 쿼리를 테스트 해볼 수 있다
 
 ## 13.9 팔로잉바 - 컴포넌트
+
+## 13.10 팔로잉바 - 스타일링
+
+## 13.11 팔로잉바 - 라이브러리
+
+- 팔로잉바에 multi carousel 라이브러리 적용
+  - https://www.npmjs.com/package/react-multi-carousel
