@@ -115,3 +115,12 @@ export async function getUserByUsername(username: string) {
 
 - 팔로잉바에 multi carousel 라이브러리 적용
   - https://www.npmjs.com/package/react-multi-carousel
+
+## 13.12 포스트 리스트 - 소개
+
+- 포스트 리스트 만들기
+- GROQ의 Joins 사용
+  - 사용자와 사용자가 following하는 정보를 갖고 author와 매칭되는 정보를 가져와야 함
+- 포스트의 이미지는 `@sanity/image-url` 사용
+- 상대적인 시간 `timeAgo` 라이브러리 사용
+  - https://www.npmjs.com/package/timeago-react
