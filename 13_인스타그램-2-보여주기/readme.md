@@ -124,3 +124,16 @@ export async function getUserByUsername(username: string) {
 - 포스트의 이미지는 `@sanity/image-url` 사용
 - 상대적인 시간 `timeAgo` 라이브러리 사용
   - https://www.npmjs.com/package/timeago-react
+
+## 13.13 포스트 목록 - 서비스
+
+```ts
+// Books by author.name (book.author is a reference)
+*[_type == "book" && author._ref in *[_type=="author" && name=="John Doe"]._id ]{...}
+```
+
+- book이라는 스키마에 있는 author의 reference가 type이 "author"라는 스키마와 조인해서 가져온다
+
+  - 이름ㅇ이 John Doe인 저자의 책들을 가져온다
+
+- 타입이 book인 스키마의 author는 <- 타입이 author인 스키마에서 이름이 John Doe인 것의 id를 가져온다
