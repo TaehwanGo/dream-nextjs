@@ -137,3 +137,9 @@ export async function getUserByUsername(username: string) {
   - 이름ㅇ이 John Doe인 저자의 책들을 가져온다
 
 - 타입이 book인 스키마의 author는 <- 타입이 author인 스키마에서 이름이 John Doe인 것의 id를 가져온다
+
+## 13.14 포스트 목록 - 이미지 URL
+
+- 이미지를 단순히 asset->url로 가져오면 이미지의 크기를 조절할 수 없다(원본 이미지)
+- 이미지의 크기를 조절하려면 `@sanity/image-url` 라이브러리를 사용해야 한다
+  - https://www.npmjs.com/package/@sanity/image-url

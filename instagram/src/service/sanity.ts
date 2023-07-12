@@ -1,4 +1,6 @@
 import { createClient } from "@sanity/client";
+import imageUrlBuilder from "@sanity/image-url";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export const client = createClient({
   projectId: process.env.SANITY_PROJECT_ID,
@@ -7,3 +9,9 @@ export const client = createClient({
   apiVersion: "2023-06-25", // use current date (YYYY-MM-DD) to target the latest API version
   token: process.env.SANITY_SECRET_TOKEN, // Only if you want to update content with the client - 데이터를 업데이트 하므로 토큰이 필요
 });
+
+const builder = imageUrlBuilder(client);
+
+export function urlFor(source: SanityImageSource) {
+  return builder.image(source).width(800).url();
+}
