@@ -143,3 +143,8 @@ export async function getUserByUsername(username: string) {
 - 이미지를 단순히 asset->url로 가져오면 이미지의 크기를 조절할 수 없다(원본 이미지)
 - 이미지의 크기를 조절하려면 `@sanity/image-url` 라이브러리를 사용해야 한다
   - https://www.npmjs.com/package/@sanity/image-url
+
+## 13.15 포스트 목록 - 컴포넌트
+
+- timeago 라이브러리 사용 : 상대적 날짜 표시
+- npm i timeago.js
