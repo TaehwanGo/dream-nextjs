@@ -9,14 +9,18 @@ export default function PostList() {
   return (
     <section>
       {isLoading && (
-        <div>
+        <div className="mt-32 text-center">
           <GridLoader color="red" />
         </div>
       )}
       {posts && (
         <ul>
           {posts.map((post) => {
-            return <PostListCard key={post.id} post={post} />;
+            return (
+              <li key={post.id} className="mb-4">
+                <PostListCard post={post} />
+              </li>
+            );
           })}
         </ul>
       )}

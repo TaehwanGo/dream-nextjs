@@ -148,3 +148,5 @@ export async function getUserByUsername(username: string) {
 
 - timeago 라이브러리 사용 : 상대적 날짜 표시
 - npm i timeago.js
+
+## 13.16 포스트 목록 - 스타일링
