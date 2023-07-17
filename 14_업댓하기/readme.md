@@ -186,3 +186,43 @@ export default function usePosts() {
 
 - useMe에서 전달하는 것들을 prop으로 전달 -> 다른 것들 모두 rerendering
   - 함수들에 useCallback을 사용
+
+## 14.18 팔로우 버튼 - 소개
+
+## 14.19 팔로우 버튼 - 서버
+
+### 팔로우-팔로잉 구현 개념
+
+- Following과 Followers가 각각 존재
+- B가 A를 팔로우(A <- B)
+  - B사용자의 Following에 A를 추가
+  - A사용자의 Followers에 B를 추가
+- B가 A를 언팔로우(A <- B)
+
+  - B사용자의 Following에서 A를 제거
+  - A사용자의 Followers에서 B를 제거
+
+### 여러 사용자 동시 업데이트
+
+- 기존에 한 사용자를 업데이트 : path
+- 여러 사용자를 업데이트 : Multiple mutations in a transaction
+  - https://www.sanity.io/docs/js-client#multiple-mutations-in-a-transaction
+
+```ts
+// src/service/user.ts
+export async function follow(myId: string, targetId: string) {
+  return client
+    .transaction() //
+    .patch(myId, (user) =>
+      user
+        .setIfMissing({ following: [] })
+        .append("following", [{ _ref: targetId, _type: "reference" }])
+    )
+    .patch(targetId, (user) =>
+      user
+        .setIfMissing({ followers: [] })
+        .append("following", [{ _ref: myId, _type: "reference" }])
+    )
+    .commit({ autoGenerateArrayKeys: true });
+}
+```
