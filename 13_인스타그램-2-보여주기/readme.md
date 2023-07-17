@@ -150,3 +150,58 @@ export async function getUserByUsername(username: string) {
 - npm i timeago.js
 
 ## 13.16 포스트 목록 - 스타일링
+
+## 13.17 포스트 목록 - 리팩토링
+
+### dynamic import
+
+```
+Warning: Prop `style` did not match. Server: "display:inline-block;background-color:red;width:15px;height:15px;margin:2px;border-radius:100%;animation-fill-mode:both;animation:react-spinners-GridLoader-grid 1.0491292850450247s 0.24912928504502457s infinite ease" Client: "display:inline-block;background-color:red;width:15px;height:15px;margin:2px;border-radius:100%;animation-fill-mode:both;animation:react-spinners-GridLoader-grid 0.8766746920757024s 0.07667469207570238s infinite ease"
+```
+
+- 로딩 스피너 두 개
+- 서버에서 만들어진 것과 클라이언트에서 하이드레이션 했을 때 달라지는 경우
+- lazyLoading, dynamic import
+  - GridSpinner.tsx
+
+```tsx
+import dynamic from "next/dynamic";
+
+const GridLoader = dynamic(
+  () => import("react-spinners").then((lib) => lib.GridLoader),
+  {
+    ssr: false,
+  }
+);
+
+interface Props {
+  color?: string;
+}
+export default function GridSpinner({ color = "red" }: Props) {
+  return <GridLoader color={color} />;
+}
+```
+
+### image priority
+
+```
+Image with src "https://cdn.sanity.io/images/bgt40mwm/production/d9c7ee93a54d548f138d4cfb03a5ccb45ccd0343-1000x750.jpg?w=800" was detected as the Largest Contentful Paint (LCP). Please add the "priority" property if this image is above the fold.
+Read more: https://nextjs.org/docs/api-reference/next/image#priority
+```
+
+```tsx
+// 컴포넌트
+<Image
+  className="object-cover w-full aspect-square"
+  src={image}
+  alt={`photo by ${username}`}
+  width={500}
+  height={500}
+  priority={priority}
+/>
+
+// 컴포넌트 사용
+<PostListCard post={post} priority={index < 2} />
+```
+
+- 이미지가 많은 경우 priority를 줘서 위에 있는 이미지를 먼저 로딩하게 할 수 있다
