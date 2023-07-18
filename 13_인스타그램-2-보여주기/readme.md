@@ -205,3 +205,16 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 ```
 
 - 이미지가 많은 경우 priority를 줘서 위에 있는 이미지를 먼저 로딩하게 할 수 있다
+
+## 13.18 상세다이얼로그 구현하기 - 소개
+
+- 다이얼로그(모달) 구현
+  - 이미지 보여주기
+  - 코멘츠 보여주기
+
+## 13.19 상세다일로그 - Portal 사용
+
+- https://legacy.reactjs.org/docs/portals.html
+- https://react.dev/reference/react-dom/createPortal
+
+- 사용하고자 하는 곳에서 createPortal을 통해서 연결하고자 하는 dom 요소에 연결
