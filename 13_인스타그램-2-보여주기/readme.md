@@ -218,3 +218,7 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 - https://react.dev/reference/react-dom/createPortal
 
 - 사용하고자 하는 곳에서 createPortal을 통해서 연결하고자 하는 dom 요소에 연결
+
+## 13.20 상세다일로그 - 서비스
+
+-

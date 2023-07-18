@@ -35,3 +35,27 @@ export async function getFollowingPostsOf(username: string) {
       posts.map((post: SimplePost) => ({ ...post, image: urlFor(post.image) }))
     );
 }
+
+export async function getPost(id: string) {
+  return client
+    .fetch(
+      groq`
+    *[_type == "post" && _id == "${id}"][0]{
+      ...,
+      "username": author->username,
+      "userImage": author->image,
+      "image": photo,
+      "likes": likes[]->username,
+      comments[]{
+        comment, "username": author->username, "image": author->image
+      },
+      "id": _id,
+      "createdAt": _createdAt,
+    }
+    `
+    )
+    .then((post) => ({
+      ...post,
+      Image: urlFor(post.image),
+    }));
+}
