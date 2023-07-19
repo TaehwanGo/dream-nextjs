@@ -5,7 +5,7 @@ import { parseDate } from "@/util/date";
 interface ActionBarProps {
   likes: string[];
   username: string;
-  text: string;
+  text?: string;
   createdAt: string;
 }
 export default function ActionBar({
@@ -24,10 +24,12 @@ export default function ActionBar({
         <p className="mb-2 text-sm font-bold">{`${likes?.length ?? 0} ${
           likes?.length > 1 ? "likes" : "like"
         }`}</p>
-        <p>
-          <span className="mr-1 font-bold">{username}</span>
-          {text}
-        </p>
+        {text && (
+          <p>
+            <span className="mr-1 font-bold">{username}</span>
+            {text}
+          </p>
+        )}
         <p
           className="my-2 text-xs uppercase text-neutral-500"
           title={createdAt}
