@@ -222,3 +222,5 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 ## 13.20 상세다일로그 - 서비스
 
 ## 13.21 상세다일로그 - 컴포넌트
+
+## 13.22 앱전체 레이아웃 스타일링

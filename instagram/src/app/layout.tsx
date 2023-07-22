@@ -19,12 +19,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={openSans.className}>
-      <body className="w-full max-w-screen-xl mx-auto overflow-auto">
+      <body className="w-full overflow-auto bg-neutral-50">
         <AuthContext>
           <header className="sticky top-0 z-10 bg-white border-b">
-            <Navbar />
+            <div className="max-w-screen-xl mx-auto">
+              <Navbar />
+            </div>
           </header>
-          <main className="flex justify-center w-full min-h-full bg-neutral-50">
+          <main className="flex justify-center w-full">
             <SWRConfigContext>{children}</SWRConfigContext>
           </main>
         </AuthContext>
