@@ -224,3 +224,24 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 ## 13.21 상세다일로그 - 컴포넌트
 
 ## 13.22 앱전체 레이아웃 스타일링
+
+## 13.23 사용자 검색 구현하기 소개 + 중간 정리
+
+### 중간 점검
+
+- Part2의 중점
+
+  - Content Lake <-> Server(Backend: Next.js - 서버에서 실행) <-> Client(Next.js - browser에서 실행)
+
+- flow
+  - server side rendering(웹사이트 접속 -> Next.js -> Client)
+  - client component에서 데이터 요청(Client -> Next.js api)
+  - Next.js의 api에서 요청을 받아서 Content Lake에 요청(Next.js api -> Content Lake)
+  - Content Lake에서 데이터를 받아서 Next.js의 api로 전달(Content Lake -> Next.js api)
+  - Next.js의 api에서 데이터를 받아서 client component로 전달(Next.js api -> Client)
+
+### 사용자 검색 구현하기 - 소개
+
+- 아무것도 입력하지 않았을 때는 모든 사용자를 보여준다
+- 사용자를 검색하면 검색어에 맞는 사용자를 보여준다(debounce 적용해서 자동으로 검색 - 검색버튼 필요 없음)
+- 보여지는 사용자를 클릭하면 해당 유저 페이지로 이동한다
