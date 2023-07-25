@@ -1,5 +1,6 @@
 import groq from "groq";
 import { client } from "./sanity";
+import { ProfileUser } from "@/model/user";
 
 type OAuthUser = {
   id: string;
@@ -39,9 +40,19 @@ export async function searchUsers(keyword?: string) {
   const query = keyword
     ? `&& (name match "${keyword}*") || (username match "${keyword}*")`
     : "";
-  return client.fetch(groq`*[_type == "user" ${query}]{
+  return client
+    .fetch(
+      groq`*[_type == "user" ${query}]{
     ...,
     "following": count(following),
     "followers": count(followers),
-  }`);
+  }`
+    )
+    .then((users) =>
+      users.map((user: ProfileUser) => ({
+        ...user,
+        following: user.following ?? 0,
+        followers: user.followers ?? 0,
+      }))
+    );
 }

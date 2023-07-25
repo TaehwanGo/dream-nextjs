@@ -253,3 +253,5 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 ## 13.25 사용자 검색 - 컴포넌트
 
 - 서비스에서 가져온 데이터로 UI 작업
+
+## 13.26 사용자 검색 - 카드
