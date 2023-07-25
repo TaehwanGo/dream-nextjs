@@ -255,3 +255,11 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 - 서비스에서 가져온 데이터로 UI 작업
 
 ## 13.26 사용자 검색 - 카드
+
+## 13.27 ~ 28 사용자 검색 - 디바운스
+
+### 이슈
+
+- 예를 들어, anna라고 검색 시 한글자 마다 요청이 계속 들어감
+- https://github.com/vercel/swr/issues/110
+- https://redd.one/blog/debounce-vs-throttle

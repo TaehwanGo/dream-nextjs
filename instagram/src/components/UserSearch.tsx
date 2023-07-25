@@ -1,10 +1,11 @@
 "use client";
 
 import { ProfileUser } from "@/model/user";
-import { ChangeEvent, FormEvent, useState } from "react";
+import { FormEvent, useState } from "react";
 import useSWR from "swr";
 import GridSpinner from "./ui/GridSpinner";
 import UserCard from "./UserCard";
+import useDebouncedValue from "@/hooks/useDebouncedValue";
 
 export default function UserSearch() {
   // 사용자가 키워드를 입력, 키워드 전달 : /api/search/${keyword}
@@ -12,11 +13,12 @@ export default function UserSearch() {
   // 검색하는 keyword가 없다면 /api/search => 모든 사용자를 가져옴
 
   const [keyword, setKeyword] = useState("");
+  const debouncedKeyword = useDebouncedValue(keyword);
   const {
     data: users,
     isLoading,
     error,
-  } = useSWR<ProfileUser[]>(`/api/search/${keyword}`);
+  } = useSWR<ProfileUser[]>(`/api/search/${debouncedKeyword}`);
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -41,7 +43,6 @@ export default function UserSearch() {
         {users &&
           users.map((user) => (
             <li key={user.name}>
-              {/* <p>{user.username}</p> */}
               <UserCard user={user} />
             </li>
           ))}
