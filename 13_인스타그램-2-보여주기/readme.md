@@ -272,3 +272,5 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 ## 13.30 사용자 프로필 - 서비스
 
 ## 13.31 사용자 프로필 - 컴포넌트
+
+## 13.32 사용자 프로필 - 스타일링

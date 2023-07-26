@@ -1,4 +1,4 @@
-type AvatarSize = "small" | "medium" | "large";
+type AvatarSize = "small" | "medium" | "large" | "xlarge";
 
 interface AvatarProps {
   image?: string | null;
@@ -21,9 +21,9 @@ export default function Avatar({
       <img
         src={image ?? undefined}
         alt="user profile"
-        className={`bg-white rounded-full object-cover ${getImageSizeStyle(
-          size
-        )}`}
+        className={`bg-white rounded-full object-cover ${
+          getImageSizeStyle(size).image
+        }`}
         referrerPolicy="no-referrer"
       />
     </div>
@@ -35,28 +35,37 @@ function getContainerStyle(size: AvatarSize, highlight: boolean): string {
   const highlightStyle = highlight
     ? "bg-gradient-to-bl from-fuchsia-600 via-rose-500 to-amber-300"
     : "";
-  const sizeStyle = getContainerSize(size);
-  return `${baseStyle} ${highlightStyle} ${sizeStyle}`;
+  const { container } = getImageSizeStyle(size);
+  return `${baseStyle} ${highlightStyle} ${container}`;
 }
 
-function getContainerSize(size: AvatarSize): string {
+type ImageSizeStyle = {
+  container: string;
+  image: string;
+};
+function getImageSizeStyle(size: AvatarSize): ImageSizeStyle {
   switch (size) {
     case "small":
-      return "w-9 h-9";
+      return {
+        container: "w-9 h-9",
+        image: "w-[34px] h-[34px] p-[0.1rem]",
+      };
     case "medium":
-      return "w-11 h-11";
+      return {
+        container: "w-11 h-11",
+        image: "w-[42px] h-[42px] p-[0.1rem]",
+      };
     case "large":
-      return "w-[68px] h-[68px]";
-  }
-}
-
-function getImageSizeStyle(size: AvatarSize): string {
-  switch (size) {
-    case "small":
-      return "w-[34px] h-[34px] p-[0.1rem]";
-    case "medium":
-      return "w-[42px] h-[42px] p-[0.1rem]";
-    case "large":
-      return "w-16 h-16 p-[0.2rem]";
+      return {
+        container: "w-[68px] h-[68px]",
+        image: "w-16 h-16 p-[0.2rem]",
+      };
+    case "xlarge":
+      return {
+        container: "w-[142px] h-[142px]",
+        image: "w-[138px] h-[138px] p-[0.3rem]",
+      };
+    default:
+      throw new Error(`Unsupported type size: ${size}`);
   }
 }
