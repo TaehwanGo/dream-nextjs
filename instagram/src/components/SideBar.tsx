@@ -1,8 +1,8 @@
-import { User } from "@/model/user";
+import { AuthUser } from "@/model/user";
 import Avatar from "./Avatar";
 
 interface SideBarProps {
-  user: User;
+  user: AuthUser;
 }
 
 export default function SideBar({

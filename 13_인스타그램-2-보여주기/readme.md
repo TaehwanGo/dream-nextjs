@@ -263,3 +263,10 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 - 예를 들어, anna라고 검색 시 한글자 마다 요청이 계속 들어감
 - https://github.com/vercel/swr/issues/110
 - https://redd.one/blog/debounce-vs-throttle
+
+## 13.29 사용자 프로필 구현 - 소개
+
+- 사용자 페이지는 로그인을 하지 않아도 볼 수 있음
+- 단, 로그인을 하지 않으면 포스트 상세 페이지 클릭 시 로그인 하라는 페이지로 이동
+
+## 13.30 사용자 프로필 - 서비스
