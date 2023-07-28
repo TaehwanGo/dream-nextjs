@@ -4,11 +4,15 @@ import { Open_Sans } from "next/font/google";
 import AuthContext from "@/context/AuthContext";
 import SWRConfigContext from "@/context/SWRConfigContext";
 import { PORTAL_ID } from "@/constants/ids";
+import { Metadata } from "next";
 
 const openSans = Open_Sans({ subsets: ["latin"] });
 
-export const metadata = {
-  title: "Instagram",
+export const metadata: Metadata = {
+  title: {
+    default: "Instagram",
+    template: "%s | Instagram",
+  },
   description: "Instagram",
 };
 

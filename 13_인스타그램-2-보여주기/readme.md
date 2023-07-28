@@ -280,3 +280,33 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 ## 13.34 사용자 포스트 - 컴포넌트
 
 ## 13.35 사용자 포스트 - 스타일링
+
+## 13.36 SEO 및 점검
+
+### SEO
+
+- 각 페이지 metadata 설정
+- 동적페이지는 동적 메타데이터를 설정
+  - generateMetadata
+
+```ts
+import { cache } from "react";
+
+// 한번 불러온 사용자 정보는 캐시에 저장 -> 컴포넌트와 메타데이터 두 군데에서 사용하기 때문에 캐시에 저장
+const getUser = cache(async (username: string) => getUserForProfile(username));
+
+export async function generateMetadata({
+  params: { username },
+}: Props): Promise<Metadata> {
+  const user = await getUser(username);
+  return {
+    title: `${user?.name} (@${user?.username}) • Instagram Photos`,
+    description: `${user?.name}'s all Instagram posts`,
+  };
+}
+```
+
+### 빌드 시 이슈
+
+- `/api/search` 가 static으로 생성 됨
+  - 사용자가 변경 됨에 따라 다른 결과를 보여주지 못 함
