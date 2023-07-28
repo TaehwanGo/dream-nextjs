@@ -310,3 +310,19 @@ export async function generateMetadata({
 
 - `/api/search` 가 static으로 생성 됨
   - 사용자가 변경 됨에 따라 다른 결과를 보여주지 못 함
+
+## 13.37 마무리
+
+- Part2에서 했던 것들
+
+  - 주로 보여주는 것들
+
+- flow
+
+  - content lake <-> server(Next.js) <-> client
+
+- 블로그 프로젝트와 달리 대부분 SSR로 동작
+
+- 다음 파트
+  - 인터렉션
+  - 좋아요, 언팔로우, 팔로우
