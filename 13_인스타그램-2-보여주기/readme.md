@@ -278,3 +278,5 @@ Read more: https://nextjs.org/docs/api-reference/next/image#priority
 ## 13.33 사용자 포스트 - 서비스
 
 ## 13.34 사용자 포스트 - 컴포넌트
+
+## 13.35 사용자 포스트 - 스타일링
