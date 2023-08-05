@@ -36,6 +36,31 @@
 
 ## 14.5 좋아요 - 라우트 핸들러
 
+- 이번 강의 목표
+
+  - 라우트 핸들러
+  - Sanity 정의
+
+- Post scheme(sanity-studio/schemas/post.js)를 보면 필드 중 Likes(좋아요)에 Author에 user가 배열로 포함되어 있다
+
+  - 좋아요를 누를때 해당 포스트의 좋아요에 유저배열에서 현재 유저를 추가해준다
+
+```ts
+// api/likes/route.ts
+// 참고
+client
+  .patch("bike-123")
+  // Ensure that the `reviews` arrays exists before attempting to add items to it
+  .setIfMissing({ reviews: [] })
+  // Add the items after the last item in the array (append)
+  .insert("after", "reviews[-1]", [{ title: "Great bike!", stars: 5 }])
+  .commit({
+    // Adds a `_key` attribute to array items, unique within the array, to
+    // ensure it can be addressed uniquely in a real-time collaboration context
+    autoGenerateArrayKeys: true,
+  });
+```
+
 - 업데이트 요청 : PUT
 
   - `/api/likes`

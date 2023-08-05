@@ -28,16 +28,25 @@ export const authOptions: AuthOptions = {
       });
       return true;
     },
-    async session({ session }) {
+    async session({ session, token }) {
       // console.log(session);
       const user = session?.user;
       if (user) {
         session.user = {
           ...user,
           username: user.email.split("@")[0],
+          id: token.id as string,
         };
       }
       return session;
+    },
+    async jwt({ token, user }) {
+      // jwt는 token이 만들어질 때마다 호출됨
+      // 참고 : https://next-auth.js.org/configuration/callbacks#jwt-callback
+      if (user) {
+        token.id = user.id;
+      }
+      return token;
     },
   },
 };

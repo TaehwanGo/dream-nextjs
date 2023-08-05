@@ -89,3 +89,26 @@ function mapPosts(posts: SimplePost[]) {
     image: urlFor(post.image),
   }));
 }
+
+// 특정 포스트를 좋아요, 좋아요 취소
+export async function likePost(postId: string, userId: string) {
+  return client
+    .patch(postId)
+    .setIfMissing({ likes: [] }) // likes가 없으면 빈 배열로 초기화
+    .append("likes", [
+      {
+        _ref: userId,
+        _type: "reference",
+      },
+    ])
+    .commit({
+      autoGenerateArrayKeys: true,
+    });
+}
+
+export async function unlikePost(postId: string, userId: string) {
+  return client
+    .patch(postId)
+    .unset([groq`likes[_ref == "${userId}"]`]) // likes 배열에서 userId를 가진 요소를 삭제
+    .commit();
+}
