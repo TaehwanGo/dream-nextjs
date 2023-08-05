@@ -87,6 +87,7 @@ function mapPosts(posts: SimplePost[]) {
   return posts.map((post) => ({
     ...post,
     image: urlFor(post.image),
+    likes: post.likes ?? [],
   }));
 }
 
