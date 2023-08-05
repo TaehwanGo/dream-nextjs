@@ -13,13 +13,22 @@
 
 - https://swr.vercel.app/ko/docs/advanced/understanding
 - data는 undefined -> loading -> data
-- 기존 데이터가 존재하면 stale(오래된 데이터)를 보여주고 새로운 데이터를 가져온다.(while revalidating)
+- 기존 데이터가 존재하면 `stale`(오래된 데이터)를 보여주고 새로운 데이터를 가져온다.(`while` `revalidating`)
+
+- Key Change + Previous Data
+  - 키를 따로 지정하지 않으면 url을 키로 사용한다
 
 ## 14.3 좋아요 토글하기 - 소개
 
 - SWR 을 이용 시 아래를 중점적으로 살펴보기
   - mutation
   - revalidation
+- Sanity에서 데이터 업데이트 : patch
+  - https://www.sanity.io/docs/js-client#patch-a-document-only-if-revision-matches
+- 참고
+  - https://www.sanity.io/docs/js-client
+  - https://next-auth.js.org/configuration/callbacks
+  - https://swr.vercel.app/docs/mutation
 
 ## 14.4 좋아요 - 토글 버튼
 
