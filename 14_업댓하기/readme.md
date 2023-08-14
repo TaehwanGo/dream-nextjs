@@ -238,7 +238,68 @@ export default {
 };
 ```
 
-## 14.12 코멘트 추가 - 소개
+## 14.12 ~ 15 코멘트 추가
+
+- 좋아요, 북마크와 같이 모발과 메인 페이지 동시 업데이트
+- 코멘트 입력창에 한글자 이상 입력해야 Post 버튼 활성화
+
+### 구현 단계
+
+- 1. 서비스 구현
+- 2. 라우터 구현
+- 3. UI 확인
+
+### 스키마 확인
+
+- likes는 사용자id를 가지고 있는 배열
+- comments는 배열이지만 Comment라는 객체를 가지고 있음
+  - Comment 객체: { 사용자 id, comment 내용}
+
+```ts
+export default {
+  title: "Post",
+  name: "post",
+  type: "document",
+  fields: [
+    // ...
+    {
+      title: "Comments",
+      name: "comments",
+      type: "array",
+      of: [
+        {
+          title: "Comment",
+          name: "comment",
+          type: "document",
+          fields: [
+            {
+              title: "Author",
+              name: "author",
+              type: "reference",
+              to: [{ type: "user" }],
+            },
+            {
+              title: "Comment",
+              name: "comment",
+              type: "string",
+            },
+          ],
+        },
+      ],
+    },
+  ],
+  // ...
+};
+```
+
+### 14.15 코멘트 - 상세 화면
+
+#### 프로세스
+
+- 메인에서 코멘트를 포함한 post 데이터엔 comment가 숫자로만 존재
+  - `api/posts`
+- 상세 페이지(PostDetail)를 클릭하면 다시 해당 포스트의 post 데이터를 가져오고 그 때 comment 상세 데이터까지 포함된 데이터를 받음
+  - `api/posts/[id]`
 
 ## 14.16 코멘트 - 리팩토링
 

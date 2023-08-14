@@ -113,3 +113,26 @@ export async function unlikePost(postId: string, userId: string) {
     .unset([groq`likes[_ref == "${userId}"]`]) // likes 배열에서 userId를 가진 요소를 삭제
     .commit();
 }
+
+// 코멘트
+export async function addComment(
+  postId: string,
+  userId: string,
+  comment: string
+) {
+  return client
+    .patch(postId)
+    .setIfMissing({ comments: [] }) // likes가 없으면 빈 배열로 초기화
+    .append("comments", [
+      {
+        comment,
+        author: {
+          _ref: userId,
+          _type: "reference",
+        },
+      },
+    ])
+    .commit({
+      autoGenerateArrayKeys: true,
+    });
+}
