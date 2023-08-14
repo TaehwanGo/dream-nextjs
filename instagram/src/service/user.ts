@@ -28,7 +28,7 @@ export async function getUserByUsername(username: string) {
   return client.fetch(
     groq`*[_type == "user" && username == "${username}"][0]{
       ...,
-      "_id": _id,
+      "id": _id,
       following[]->{username, image},
       followers[]->{username, image},
       "bookmarks": bookmarks[]->_id
