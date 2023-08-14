@@ -209,7 +209,34 @@ export default function usePosts() {
 }
 ```
 
-## 14.9 북마크 토글하기 - 소개
+## 14.9 ~ 11 북마크 토글하기
+
+```ts
+// user schema
+import { Rule } from "sanity";
+
+export default {
+  title: "User",
+  name: "user",
+  type: "document",
+  fields: [
+    // ...
+    {
+      title: "Bookmarks",
+      name: "bookmarks",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "post" }],
+        },
+      ],
+      validation: (Rule: Rule) => Rule.unique(),
+    },
+  ],
+  // ...
+};
+```
 
 ## 14.12 코멘트 추가 - 소개
 

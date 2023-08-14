@@ -75,3 +75,26 @@ export async function getUserForProfile(username: string) {
       posts: user.posts ?? 0,
     }));
 }
+
+// 북마크 추가
+export async function addBookmark(userId: string, postId: string) {
+  return client
+    .patch(userId)
+    .setIfMissing({ addBookmark: [] }) // likes가 없으면 빈 배열로 초기화
+    .append("bookmarks", [
+      {
+        _ref: postId,
+        _type: "reference",
+      },
+    ])
+    .commit({
+      autoGenerateArrayKeys: true,
+    });
+}
+
+export async function removeBookmark(userId: string, postId: string) {
+  return client
+    .patch(userId)
+    .unset([groq`bookmarks[_ref == "${postId}"]`]) // likes 배열에서 userId를 가진 요소를 삭제
+    .commit();
+}
