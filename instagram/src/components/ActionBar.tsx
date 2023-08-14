@@ -9,7 +9,7 @@ import { useState } from "react";
 import BookmarkFillIcon from "./ui/icons/BookmarkFillIcon";
 import { SimplePost } from "@/model/post";
 import { useSession } from "next-auth/react";
-import { useSWRConfig } from "swr";
+import usePost from "@/hooks/usePost";
 
 interface ActionBarProps {
   post: SimplePost;
@@ -20,14 +20,11 @@ export default function ActionBar({ post }: ActionBarProps) {
   const user = session?.user;
   const isLiked = user ? likes.includes(user.username) : false;
   const [bookmarked, setBookmarked] = useState(false);
-  const { mutate } = useSWRConfig();
+  const { setLike } = usePost();
   const handleLike = (like: boolean) => {
-    fetch("api/likes", {
-      method: "PUT",
-      body: JSON.stringify({ id, like }),
-    }).then(() => {
-      mutate("/api/posts");
-    });
+    if (user) {
+      setLike(post, user.username, like);
+    }
   };
   return (
     <>

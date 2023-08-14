@@ -3,9 +3,10 @@ import { SimplePost } from "@/model/post";
 import useSWR from "swr";
 import PostListCard from "./PostListCard";
 import GridSpinner from "./ui/GridSpinner";
+import usePost from "@/hooks/usePost";
 
 export default function PostList() {
-  const { data: posts, isLoading } = useSWR<SimplePost[]>("/api/posts");
+  const { posts, isLoading } = usePost();
   return (
     <section>
       {isLoading && (
