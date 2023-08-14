@@ -1,5 +1,6 @@
 import { Comment, SimplePost } from "@/model/post";
-import useSWR from "swr";
+import { useCallback } from "react";
+import useSWR, { useSWRConfig } from "swr";
 
 async function updateLike(id: string, like: boolean) {
   return fetch("api/likes", {
@@ -23,38 +24,45 @@ export default function usePost() {
     error,
     mutate,
   } = useSWR<SimplePost[]>("/api/posts");
+  const { mutate: globalMutate } = useSWRConfig();
 
-  const setLike = (post: SimplePost, username: string, like: boolean) => {
-    const newPost = {
-      ...post,
-      likes: like
-        ? [...post.likes, username]
-        : post.likes.filter((v) => v !== username),
-    };
-    const newPosts = posts?.map((p) => (p.id === post.id ? newPost : p));
+  const setLike = useCallback(
+    (post: SimplePost, username: string, like: boolean) => {
+      const newPost = {
+        ...post,
+        likes: like
+          ? [...post.likes, username]
+          : post.likes.filter((v) => v !== username),
+      };
+      const newPosts = posts?.map((p) => (p.id === post.id ? newPost : p));
 
-    return mutate(updateLike(post.id, like), {
-      optimisticData: newPosts,
-      populateCache: false,
-      revalidate: false, // 서버에 요청을 보내지 않음
-      rollbackOnError: true,
-    });
-  };
+      return mutate(updateLike(post.id, like), {
+        optimisticData: newPosts,
+        populateCache: false,
+        revalidate: false, // 서버에 요청을 보내지 않음
+        rollbackOnError: true,
+      });
+    },
+    [posts, mutate]
+  );
 
-  const postComment = (post: SimplePost, comment: Comment) => {
-    const newPost = {
-      ...post,
-      comments: post.comments + 1,
-    };
-    const newPosts = posts?.map((p) => (p.id === post.id ? newPost : p));
+  const postComment = useCallback(
+    (post: SimplePost, comment: Comment) => {
+      const newPost = {
+        ...post,
+        comments: post.comments + 1,
+      };
+      const newPosts = posts?.map((p) => (p.id === post.id ? newPost : p));
 
-    return mutate(addComment(post.id, comment.comment), {
-      optimisticData: newPosts,
-      populateCache: false,
-      revalidate: false, // 서버에 요청을 보내지 않음
-      rollbackOnError: true,
-    });
-  };
+      return mutate(addComment(post.id, comment.comment), {
+        optimisticData: newPosts,
+        populateCache: false,
+        revalidate: false, // 서버에 요청을 보내지 않음
+        rollbackOnError: true,
+      }).then(() => globalMutate("/api/posts"));
+    },
+    [posts, mutate, globalMutate]
+  );
 
   return {
     posts,
