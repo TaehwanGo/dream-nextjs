@@ -1,22 +1,24 @@
-"use client";
-
 import HeartIcon from "./ui/icons/HeartIcon";
 import BookmarkIcon from "./ui/icons/BookmarkIcon";
 import { parseDate } from "@/util/date";
 import ToggleButton from "./ui/ToggleButton";
 import HeartFillIcon from "./ui/icons/HeartFillIcon";
-import { useState } from "react";
 import BookmarkFillIcon from "./ui/icons/BookmarkFillIcon";
-import { SimplePost } from "@/model/post";
-import { useSession } from "next-auth/react";
+import { Comment, SimplePost } from "@/model/post";
 import usePost from "@/hooks/usePost";
 import useMe from "@/hooks/useMe";
+import CommentForm from "./CommentForm";
 
 interface ActionBarProps {
   post: SimplePost;
   children?: React.ReactNode;
+  onComment: (comment: Comment) => void;
 }
-export default function ActionBar({ post, children }: ActionBarProps) {
+export default function ActionBar({
+  post,
+  children,
+  onComment,
+}: ActionBarProps) {
   const { id, likes, createdAt } = post;
   const { user, setBookmark } = useMe();
   const { setLike } = usePost();
@@ -31,6 +33,10 @@ export default function ActionBar({ post, children }: ActionBarProps) {
 
   const handleBookmark = (bookmark: boolean) => {
     user && setBookmark(id, bookmark);
+  };
+
+  const handleComment = (comment: string) => {
+    user && onComment({ comment, username: user.username, image: user.image });
   };
   return (
     <>
@@ -60,6 +66,7 @@ export default function ActionBar({ post, children }: ActionBarProps) {
           {parseDate(createdAt)}
         </p>
       </div>
+      <CommentForm onPostComment={handleComment} />
     </>
   );
 }

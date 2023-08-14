@@ -306,6 +306,8 @@ export default {
 - PostListCard.tsx와 PostDetail.tsx에서 중복되는 코드를 최소화
   - CommentForm을 ActionBar로 이동
 
+### CommentForm을 ActionBar로 이동
+
 ## 14.17 코멘트 - 성능개선
 
 - useFullPost에서 globalMutate를 사용
