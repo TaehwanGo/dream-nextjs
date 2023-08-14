@@ -152,10 +152,17 @@ export default function usePosts() {
 
 - Bound Mutate
   - https://swr.vercel.app/ko/docs/mutation
-  - Bound mutate는 현재 키를 기반으로 데이터로 변경하는 빠른 방법입니다. useSWR 함수에 전달된 키와 연결된 키는 캐시에서 데이터를 찾을 때 사용되며, 이렇게 찾은 데이터는 첫 번째 인자로 반환됩니다.
+  - Bound(연결된) mutate는 현재 키를 기반으로 데이터로 변경하는 빠른 방법입니다. useSWR 함수에 전달된 키와 연결된 키는 캐시에서 데이터를 찾을 때 사용되며, 이렇게 찾은 데이터는 첫 번째 인자로 반환됩니다.
   - 우리 캐시키와 직접적으로 연결된 mutate를 가져올 수 있음
 - 옵션으로 optimisticData를 설정할 수 있다
   - UI상에서 업데이트를 먼저해주고 백그라운드로 데이터를 받아온다
+
+### 개선
+
+- 기존
+  - 좋아요 클릭 -> 서버 응답 -> 캐시 업데이트 -> UI 업데이트
+- 변경
+  - 좋아요 클릭 -> 캐시 업데이트 -> UI 업데이트 -> 서버 응답
 
 ```ts
 // after: ActionBar.tsx
