@@ -393,9 +393,7 @@ export default function usePost() {
 }
 ```
 
-## 14.18 팔로우 버튼 - 소개
-
-## 14.19 팔로우 버튼 - 서버
+## 14.18 ~ 20 팔로우 버튼
 
 ### 팔로우-팔로잉 구현 개념
 
@@ -410,15 +408,15 @@ export default function usePost() {
 
 ### 여러 사용자 동시 업데이트
 
-- 기존에 한 사용자를 업데이트 : path
-- 여러 사용자를 업데이트 : Multiple mutations in a transaction
+- 기존에 한 사용자를 업데이트 : client.patch
+- 여러 사용자를 업데이트 : Multiple mutations in a `transaction`
   - https://www.sanity.io/docs/js-client#multiple-mutations-in-a-transaction
 
 ```ts
 // src/service/user.ts
 export async function follow(myId: string, targetId: string) {
   return client
-    .transaction() //
+    .transaction() // transaction()을 사용하면 여러개의 patch를 한번에 보낼 수 있다
     .patch(myId, (user) =>
       user
         .setIfMissing({ following: [] })
@@ -432,3 +430,19 @@ export async function follow(myId: string, targetId: string) {
     .commit({ autoGenerateArrayKeys: true });
 }
 ```
+
+### UI 구현
+
+- bookmark 구현 시엔 optimisticData를 전달했지만
+
+  - follow에서 해주지 않은 이유
+    - 현재 사용자 뿐만 아니라 타겟 아이디의 사용자도 업데이트 해줘야 하기 때문
+
+- 사용자 페이지에서 follow 버튼을 클릭하는 경우
+  - 이슈
+    - follow <-> unfollow는 되지만
+    - ssr로 렌더링된 followers가 몇 명인지 표시하는 부분은 업데이트가 되지 않음
+  - 해결
+    - 1. SSR -> CSR
+    - 2. Next.js 13의 새로운 기능
+  - 다음 영상에서 알아보자(14.21)
