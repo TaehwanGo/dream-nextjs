@@ -461,3 +461,21 @@ export async function follow(myId: string, targetId: string) {
   - 필요한 부분만 업데이트
 - useTransition과 함께 사용하면 의미있는 로딩 스피너를 보여줄 수 있다
 - 만약 오픈소스를 사용 중 문제가 있다면 이슈를 남겨서 기여해보자
+
+## 14.22 최신 기능 - SSR 페이지 업데이트
+
+````ts
+const router = useRouter();
+const [isPending, startTransition] = useTransition();
+const [isFetching, setIsFetching] = useState(false);
+const isUpdating = isPending || isFetching;
+
+const handleFollow = async () => {
+  setIsFetching(true);
+  await toggleFollow(user.id, !following);
+  setIsFetching(false);
+  startTransition(() => {
+    router.refresh();
+  });
+};```
+````
