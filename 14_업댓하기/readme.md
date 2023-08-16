@@ -446,3 +446,18 @@ export async function follow(myId: string, targetId: string) {
     - 1. SSR -> CSR
     - 2. Next.js 13의 새로운 기능
   - 다음 영상에서 알아보자(14.21)
+
+## 14.21 최신 기능 그리고 공부 팁
+
+### Mutating Data
+
+- 준비중인 새로운 기능
+
+  - RFC: Request For Comment
+    - 코멘트(피드백)을 받기 위한 요청
+
+- 그 전까지 권장하는 방식
+  - 데이터 변경 후 `router.refresh()`
+  - 필요한 부분만 업데이트
+- useTransition과 함께 사용하면 의미있는 로딩 스피너를 보여줄 수 있다
+- 만약 오픈소스를 사용 중 문제가 있다면 이슈를 남겨서 기여해보자
